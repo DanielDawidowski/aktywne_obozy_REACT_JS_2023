@@ -1,0 +1,13 @@
+@use "./media";
+
+body {
+  background: var(--white-1);
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 900px;
+  @include media.min-width(medium) {
+    max-width: 1200px;
+  }
+}
