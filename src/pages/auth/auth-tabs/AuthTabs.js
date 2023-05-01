@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Login from "../login/Login";
 import "./AuthTabs.scss";
+import Register from "../register/Register";
+
 function AuthTabs() {
   const [type, setType] = useState("Sign In");
 
@@ -24,7 +26,9 @@ function AuthTabs() {
         )}
         {type === "Sign Up" && (
           <div className="tab-item">
-            <div className="tab-item">register component</div>
+            <div className="tab-item">
+              <Register />
+            </div>
           </div>
         )}
       </div>
