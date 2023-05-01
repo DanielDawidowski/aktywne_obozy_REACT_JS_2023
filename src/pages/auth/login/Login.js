@@ -56,7 +56,7 @@ const Login = () => {
           disabled={!username || !password}
         />
 
-        <Link to={"/forgot-password"}>
+        <Link to={"/app/forgot-password"}>
           <span className="forgot-password">
             Forgot password? <FaArrowRight className="arrow-right" />
           </span>
