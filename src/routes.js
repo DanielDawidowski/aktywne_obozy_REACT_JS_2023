@@ -1,8 +1,8 @@
 import { useRoutes } from "react-router-dom";
-import Home from "./pages/home/Home";
-import { AuthTabs } from "./pages/auth";
-import ForgotPassword from "./pages/auth/forgot-password/ForgotPassword";
-import ResetPassword from "./pages/auth/reset-password/ResetPassword";
+import Home from "@pages/home/Home";
+import { AuthTabs } from "@pages/auth";
+import ForgotPassword from "@pages/auth/forgot-password/ForgotPassword";
+import ResetPassword from "@pages/auth/reset-password/ResetPassword";
 
 export const Routes = () => {
   const elements = useRoutes([

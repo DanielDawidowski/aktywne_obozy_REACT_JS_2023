@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { forwardRef } from "react";
-import "./Input.scss";
+import "@components/input/Input.scss";
 
 const Input = forwardRef((props, ref) => (
   <div className="form-row">
