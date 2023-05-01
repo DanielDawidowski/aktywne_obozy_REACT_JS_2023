@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { authService } from "../../../services/api/auth/auth.service";
 import Input from "../../../components/input/Input";
 import Button from "../../../components/button/Button";
 import "./Register.scss";
@@ -7,11 +8,47 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [alertType, setAlertType] = useState("");
+  const [hasError, setHasError] = useState(false);
+  const [user] = useState();
+
+  const registerUser = async (event) => {
+    setLoading(true);
+    event.preventDefault();
+    try {
+      const result = await authService.signUp({
+        username,
+        email,
+        password
+      });
+      setHasError(false);
+      setAlertType("alert-success");
+      console.log(result);
+      // return result;
+    } catch (error) {
+      setLoading(false);
+      setHasError(true);
+      setAlertType("alert-error");
+      setErrorMessage(error?.response?.data?.message);
+    }
+  };
+
+  useEffect(() => {
+    if (loading && !user) return;
+    if (user) console.log("redirect to page");
+    setLoading(false);
+  }, [loading, user]);
 
   return (
     <div className="auth-inner">
-      <form className="auth-form">
+      <form className="auth-form" onSubmit={registerUser}>
+        {hasError && errorMessage && (
+          <div className={`alerts ${alertType}`} role="alert">
+            {errorMessage}
+          </div>
+        )}
         <div className="form-input-container">
           <Input
             id="username"
