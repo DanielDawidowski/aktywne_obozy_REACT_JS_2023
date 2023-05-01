@@ -11,3 +11,8 @@ body {
     max-width: 1200px;
   }
 }
+
+.center {
+  display: grid;
+  place-items: center;
+}
