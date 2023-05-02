@@ -1,3 +1,10 @@
 import axios from "@service/axios";
 
-export const createClient = async (client) => await axios.post("/client", client);
+class ClientService {
+  async createClient(body) {
+    const response = await axios.post("/client", body);
+    return response;
+  }
+}
+
+export const clientService = new ClientService();
