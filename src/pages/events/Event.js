@@ -10,7 +10,8 @@ const initialState = {
   name: "",
   email: "",
   tel: "",
-  birthDate: ""
+  birthDate: "",
+  price: ""
 };
 
 function Event() {
@@ -19,10 +20,11 @@ function Event() {
   const [loading, setLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [checked, setChecked] = useState("");
 
   const { eventId } = useParams();
 
-  const { name, email, tel, birthDate } = values;
+  const { name, email, tel, birthDate, price } = values;
 
   const getEvent = useCallback(async () => {
     try {
@@ -53,16 +55,21 @@ function Event() {
   }, [getEvent]);
 
   const handleChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-    // console.log(e.target.name, " ---- ", e.target.value);
+    if (e.target.type === "checkbox") {
+      setValues({ ...values, price: e.target.labels[0].innerHTML });
+      setChecked(e.target.name);
+      console.log(e.target.labels[0].innerHTML);
+    } else {
+      setValues({ ...values, [e.target.name]: e.target.value });
+      // console.log(e.target.name, " ---- ", e.target.value);
+    }
   };
 
   return (
     <div>
       <h1>{event.event}</h1>
       <h1>{event.eventType}</h1>
-      <h1>{event.price}</h1>
-      <h1>{event.discountPrice}</h1>
+
       {hasError && errorMessage && <h4>{errorMessage}</h4>}
       <form>
         <Input
@@ -105,10 +112,32 @@ function Event() {
           style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
           handleChange={handleChange}
         />
+        <Input
+          id="price"
+          name="price"
+          type="checkbox"
+          value={price}
+          labelText={event.price}
+          placeholder="---"
+          style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
+          handleChange={handleChange}
+          checked={checked === "price"}
+        />
+        <Input
+          id="discountPrice"
+          name="discountPrice"
+          type="checkbox"
+          value={price}
+          labelText={event.discountPrice}
+          placeholder="---"
+          style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
+          handleChange={handleChange}
+          checked={checked === "discountPrice"}
+        />
         <Button
           label={`${loading ? "SIGNUP IN PROGRESS..." : "SIGNUP"}`}
           className="auth-button button"
-          disabled={!name || !email || !tel || !birthDate}
+          disabled={!name || !email || !tel || !birthDate || !price}
           handleClick={createClient}
         />
       </form>
