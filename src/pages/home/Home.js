@@ -1,12 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Layout from "@components/layout/Layout";
 
 function Home() {
   return (
-    <div>
+    <Layout>
       <h1>home</h1>
-      <Link to="/events">events</Link>
-    </div>
+    </Layout>
   );
 }
 

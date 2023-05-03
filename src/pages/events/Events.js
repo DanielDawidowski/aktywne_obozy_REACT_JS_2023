@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { eventService } from "@service/api/events/events.service";
+import Layout from "@components/layout/Layout";
 
 function Events() {
   const [events, setEvents] = useState([]);
@@ -21,7 +22,7 @@ function Events() {
   }, [getAllPosts]);
 
   return (
-    <div>
+    <Layout>
       {events.map((event) => {
         return (
           <div style={{ marginTop: "20px" }} key={event?._id}>
@@ -29,7 +30,7 @@ function Events() {
           </div>
         );
       })}
-    </div>
+    </Layout>
   );
 }
 
