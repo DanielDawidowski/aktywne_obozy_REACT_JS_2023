@@ -1,9 +1,10 @@
+import React, { useCallback, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import Layout from "@components/layout/Layout";
 import Button from "@components/button/Button";
 import Input from "@components/input/Input";
 import { eventService } from "@service/api/events/events.service";
 import { clientService } from "@service/api/client/client.service";
-import React, { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 
 const initialState = {
   eventId: "",
@@ -66,7 +67,7 @@ function Event() {
   };
 
   return (
-    <div>
+    <Layout>
       <h1>{event.event}</h1>
       <h1>{event.eventType}</h1>
 
@@ -141,7 +142,7 @@ function Event() {
           handleClick={createClient}
         />
       </form>
-    </div>
+    </Layout>
   );
 }
 
