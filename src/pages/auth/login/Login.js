@@ -6,7 +6,6 @@ import Input from "@components/input/Input";
 import Button from "@components/button/Button";
 import { authService } from "@service/api/auth/auth.service";
 
-
 import "@pages/auth/login/Login.scss";
 
 const Login = () => {
