@@ -5,6 +5,7 @@ import ForgotPassword from "@pages/auth/forgot-password/ForgotPassword";
 import ResetPassword from "@pages/auth/reset-password/ResetPassword";
 import Events from "@pages/events/Events";
 import Event from "@pages/events/Event";
+import ProtectedRoute from "@pages/ProtectedRoute";
 
 export const AppRouter = () => {
   const elements = useRoutes([
@@ -18,7 +19,11 @@ export const AppRouter = () => {
     },
     {
       path: "/events",
-      element: <Events />
+      element: (
+        <ProtectedRoute>
+          <Events />
+        </ProtectedRoute>
+      )
     },
     {
       path: "/event/:eventId",
