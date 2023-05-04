@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { authService } from "@service/api/auth/auth.service";
 import Input from "@components/input/Input";
 import Button from "@components/button/Button";
-import { Utils } from "@services/utils/utils.service";
+import { Utils } from "@service/utils/utils.service";
 import useLocalStorage from "@hooks/useLocalStorage";
 import useSessionStorage from "@hooks/useSessionStorage";
 import "@pages/auth/register/Register.scss";
