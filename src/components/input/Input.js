@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { forwardRef } from "react";
-import "./Input.scss";
+import "@components/input/Input.scss";
 
 const Input = forwardRef((props, ref) => (
   <div className="form-row">
@@ -23,6 +23,7 @@ const Input = forwardRef((props, ref) => (
       className={`form-input ${props.className}`}
       style={props.style}
       autoComplete="false"
+      checked={props.checked}
     />
   </div>
 ));
@@ -39,7 +40,8 @@ Input.propTypes = {
   onClick: PropTypes.func,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
-  style: PropTypes.object
+  style: PropTypes.object,
+  checked: PropTypes.bool
 };
 
 export default Input;

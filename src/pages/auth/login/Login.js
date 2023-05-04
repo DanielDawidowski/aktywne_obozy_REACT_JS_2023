@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 import useLocalStorage from "@hooks/useLocalStorage";
-import Input from "../../../components/input/Input";
-import Button from "../../../components/button/Button";
-import { authService } from "../../../services/api/auth/auth.service";
+import Input from "@components/input/Input";
+import Button from "@components/button/Button";
+import { authService } from "@service/api/auth/auth.service";
 
-import "./Login.scss";
+
+import "@pages/auth/login/Login.scss";
 
 const Login = () => {
   const [username, setUsername] = useState("Daniel");

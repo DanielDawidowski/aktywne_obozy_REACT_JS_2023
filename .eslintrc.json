@@ -27,7 +27,7 @@
     }
   },
   "rules": {
-    "prettier/prettier": ["error", {}, { "usePrettierrc": true }],
+    "prettier/prettier": ["error", { "endOfLine": "auto" }, { "usePrettierrc": true }],
     "semi": [2, "always"],
     "space-before-function-paren": [0, { "anonymous": "always", "named": "always" }],
     "camelcase": 0,
