@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
+import useLocalStorage from "@hooks/useLocalStorage";
 import Input from "../../../components/input/Input";
 import Button from "../../../components/button/Button";
 import { authService } from "../../../services/api/auth/auth.service";
@@ -16,6 +17,9 @@ const Login = () => {
   const [user, setUser] = useState();
   const [hasError, setHasError] = useState(false);
   const [keepLoggedIn, setKeepLoggedIn] = useState(false);
+  const [setStoredUsername] = useLocalStorage("username", "set");
+  const [setLoggedIn] = useLocalStorage("keepLoggedIn", "set");
+
   const navigate = useNavigate();
 
   const loginUser = async (event) => {
@@ -28,6 +32,8 @@ const Login = () => {
       });
       console.log(result);
       // return result;
+      setLoggedIn(keepLoggedIn);
+      setStoredUsername(username);
       setUser(result.data.user);
       setHasError(false);
       setAlertType("alert-success");
