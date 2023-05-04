@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 import Input from "@components/input/Input";
 import Button from "@components/button/Button";
 import { authService } from "@service/api/auth/auth.service";
+import useLocalStorage from "@hooks/useLocalStorage";
+import useSessionStorage from "@hooks/useSessionStorage";
+import { Utils } from "@services/utils/utils.service";
 
 import "@pages/auth/login/Login.scss";
 
@@ -16,6 +20,11 @@ const Login = () => {
   const [user, setUser] = useState();
   const [hasError, setHasError] = useState(false);
   const [keepLoggedIn, setKeepLoggedIn] = useState(false);
+  const [setStoredUsername] = useLocalStorage("username", "set");
+  const [setLoggedIn] = useLocalStorage("keepLoggedIn", "set");
+  const [pageReload] = useSessionStorage("pageReload", "set");
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const loginUser = async (event) => {
@@ -31,6 +40,9 @@ const Login = () => {
       setUser(result.data.user);
       setHasError(false);
       setAlertType("alert-success");
+      setLoggedIn(keepLoggedIn);
+      setStoredUsername(username);
+      Utils.dispatchUser(result, pageReload, dispatch, setUser);
       setLoading(false);
     } catch (error) {
       setLoading(false);
