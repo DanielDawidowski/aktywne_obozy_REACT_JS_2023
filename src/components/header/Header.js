@@ -45,14 +45,15 @@ function Header() {
           </li>
         )}
         {token && (
-          <li>
-            <Link to="/admin-dashboard">Admin</Link>
-          </li>
-        )}
-        {token && (
-          <li>
-            <MdLogout onClick={Logout} />
-          </li>
+          <>
+            <li>
+              <Link to="/admin-dashboard">Admin</Link>
+            </li>
+
+            <li>
+              <MdLogout onClick={Logout} />
+            </li>
+          </>
         )}
       </ul>
     </header>

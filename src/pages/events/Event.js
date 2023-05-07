@@ -136,7 +136,7 @@ function Event() {
           checked={checked === "discountPrice"}
         />
         <Button
-          label={`${loading ? "SIGNUP IN PROGRESS..." : "SIGNUP"}`}
+          label={`${loading ? "Wysyłanie..." : "Wyślij"}`}
           className="auth-button button"
           disabled={!name || !email || !tel || !birthDate || !price}
           handleClick={createClient}
