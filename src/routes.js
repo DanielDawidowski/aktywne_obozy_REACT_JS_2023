@@ -1,42 +1,25 @@
-import { useRoutes } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "@pages/home/Home";
 import { AuthTabs } from "@pages/auth";
 import ForgotPassword from "@pages/auth/forgot-password/ForgotPassword";
 import ResetPassword from "@pages/auth/reset-password/ResetPassword";
 import Events from "@pages/events/Events";
 import Event from "@pages/events/Event";
-import ProtectedRoute from "@pages/ProtectedRoute";
+import AdminDashboard from "@pages/admin/AdminDashboard";
+import AdminRoute from "@pages/AdminRoute";
+import CreateEvent from "@pages/admin/events/CreateEvent";
 
-export const AppRouter = () => {
-  const elements = useRoutes([
-    {
-      path: "/",
-      element: <Home />
-    },
-    {
-      path: "/app/login",
-      element: <AuthTabs />
-    },
-    {
-      path: "/events",
-      element: (
-        <ProtectedRoute>
-          <Events />
-        </ProtectedRoute>
-      )
-    },
-    {
-      path: "/event/:eventId",
-      element: <Event />
-    },
-    {
-      path: "/forgot-password",
-      element: <ForgotPassword />
-    },
-    {
-      path: "/reset-password",
-      element: <ResetPassword />
-    }
-  ]);
-  return elements;
-};
+export const AppRouter = () => (
+  <Routes>
+    <Route path="/" element={<Home />} />
+    <Route path="/app/login" element={<AuthTabs />} />
+    <Route path="/events" element={<Events />} />
+    <Route path="/event/:eventId" element={<Event />} />
+    <Route path="/forgot-password" element={<ForgotPassword />} />
+    <Route path="/reset-password" element={<ResetPassword />} />
+    <Route path="/admin-dashboard" element={<AdminRoute />}>
+      <Route path="/admin-dashboard" element={<AdminDashboard />} />
+      <Route path="/admin-dashboard/events" element={<CreateEvent />} />
+    </Route>
+  </Routes>
+);

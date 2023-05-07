@@ -8,12 +8,11 @@ import Input from "@components/input/Input";
 import Button from "@components/button/Button";
 import { authService } from "@service/api/auth/auth.service";
 import { Utils } from "@service/utils/utils.service";
-
 import "@pages/auth/login/Login.scss";
 
 const Login = () => {
   const [username, setUsername] = useState("Daniel");
-  const [password, setPassword] = useState("qweqwe");
+  const [password, setPassword] = useState("qwerty");
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [alertType, setAlertType] = useState("");
@@ -36,13 +35,11 @@ const Login = () => {
       });
       console.log(result);
       // return result;
+      setUser(result.data.user);
       setLoggedIn(keepLoggedIn);
       setStoredUsername(username);
-      setUser(result.data.user);
       setHasError(false);
       setAlertType("alert-success");
-      setLoggedIn(keepLoggedIn);
-      setStoredUsername(username);
       Utils.dispatchUser(result, pageReload, dispatch, setUser);
       setLoading(false);
     } catch (error) {
@@ -104,7 +101,7 @@ const Login = () => {
           disabled={!username || !password}
         />
 
-        <Link to={"/app/forgot-password"}>
+        <Link to={"/forgot-password"}>
           <span className="forgot-password">
             Forgot password? <FaArrowRight className="arrow-right" />
           </span>
