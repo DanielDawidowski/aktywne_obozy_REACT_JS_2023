@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { authService } from "@service/api/auth/auth.service";
 import Input from "@components/input/Input";
 import Button from "@components/button/Button";
+import { Utils } from "@service/utils/utils.service";
+import useLocalStorage from "@hooks/useLocalStorage";
+import useSessionStorage from "@hooks/useSessionStorage";
 import "@pages/auth/register/Register.scss";
 
 const Register = () => {
@@ -12,7 +16,12 @@ const Register = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [alertType, setAlertType] = useState("");
   const [hasError, setHasError] = useState(false);
-  const [user] = useState();
+  const [setStoredUsername] = useLocalStorage("username", "set");
+  const [setLoggedIn] = useLocalStorage("keepLoggedIn", "set");
+  const [pageReload] = useSessionStorage("pageReload", "set");
+
+  const [user, setUser] = useState();
+  const dispatch = useDispatch();
 
   const registerUser = async (event) => {
     setLoading(true);
@@ -23,10 +32,12 @@ const Register = () => {
         email,
         password
       });
+      setUser(result.data.user);
       setHasError(false);
       setAlertType("alert-success");
-      console.log(result);
-      // return result;
+      setLoggedIn(true);
+      setStoredUsername(username);
+      Utils.dispatchUser(result, pageReload, dispatch, setUser);
     } catch (error) {
       setLoading(false);
       setHasError(true);
