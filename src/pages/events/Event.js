@@ -4,7 +4,7 @@ import Layout from "@components/layout/Layout";
 import Button from "@components/button/Button";
 import Input from "@components/input/Input";
 import { eventService } from "@service/api/events/events.service";
-import { clientService } from "@service/api/client/client.service";
+import { clientService } from "@service/api/clients/clients.service";
 
 const initialState = {
   eventId: "",
@@ -43,6 +43,8 @@ function Event() {
       const response = await clientService.createClient(values);
       setLoading(false);
       setHasError(false);
+      setValues(initialState);
+      setChecked("");
       return response;
     } catch (error) {
       setLoading(false);

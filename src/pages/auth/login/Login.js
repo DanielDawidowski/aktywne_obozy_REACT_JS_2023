@@ -11,14 +11,14 @@ import { Utils } from "@service/utils/utils.service";
 import "@pages/auth/login/Login.scss";
 
 const Login = () => {
-  const [username, setUsername] = useState("Daniel");
+  const [username, setUsername] = useState("danielo");
   const [password, setPassword] = useState("qwerty");
+  const [keepLoggedIn, setKeepLoggedIn] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [alertType, setAlertType] = useState("");
   const [user, setUser] = useState();
   const [hasError, setHasError] = useState(false);
-  const [keepLoggedIn, setKeepLoggedIn] = useState(false);
   const [setStoredUsername] = useLocalStorage("username", "set");
   const [setLoggedIn] = useLocalStorage("keepLoggedIn", "set");
   const [pageReload] = useSessionStorage("pageReload", "set");

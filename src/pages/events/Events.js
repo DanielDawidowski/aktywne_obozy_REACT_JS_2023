@@ -8,19 +8,19 @@ function Events() {
   const [events, setEvents] = useState([]);
   const [currentPage] = useState(1);
 
-  const getAllPosts = useCallback(async () => {
+  const getAllEvents = useCallback(async () => {
     try {
       const response = await eventService.getAllEvents(currentPage);
       setEvents(response.data.events);
-      console.log("response", response.data.events);
+      // console.log("response", response.data.events);
     } catch (error) {
       console.log("error", error);
     }
   }, [currentPage]);
 
   useEffect(() => {
-    getAllPosts();
-  }, [getAllPosts]);
+    getAllEvents();
+  }, [getAllEvents]);
 
   return (
     <Layout>
@@ -29,13 +29,11 @@ function Events() {
         animate={{ opacity: 1, x: 0, transition: { duration: 1.5 } }}
         exit={{ opacity: 0, x: 100, transition: { duration: 1.5 } }}
       >
-        {events.map((event) => {
-          return (
-            <div style={{ marginTop: "20px" }} key={event?._id}>
-              <Link to={`/event/${event._id}`}>{event.event}</Link>
-            </div>
-          );
-        })}
+        {events.map((event, index) => (
+          <div style={{ marginTop: "20px" }} key={index}>
+            <Link to={`/event/${event._id}`}>{event.event}</Link>
+          </div>
+        ))}
       </motion.div>
     </Layout>
   );

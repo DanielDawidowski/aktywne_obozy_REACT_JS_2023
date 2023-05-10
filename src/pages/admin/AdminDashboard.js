@@ -9,12 +9,12 @@ function AdminDashboard() {
         <aside className="admin__nav">
           <nav>
             <ul>
-              <li>
-                <Link to="/admin-dashboard/events">Stwórz wyjazd</Link>
+              <li style={{ marginBottom: "30px" }}>
+                <Link to="/admin/events">Stwórz wyjazd</Link>
               </li>
-              {/* <li>
-                <Link to="/admin-dashboard/clients">Zgłoszenia</Link>
-              </li> */}
+              <li style={{ marginBottom: "30px" }}>
+                <Link to="/admin/clients">Zgłoszenia</Link>
+              </li>
             </ul>
           </nav>
         </aside>

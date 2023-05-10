@@ -1,40 +1,58 @@
-import React, { useEffect, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useCallback, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
+import useEffectOnce from "@hooks/useEffectOnce";
+import useLocalStorage from "@hooks/useLocalStorage";
+import useSessionStorage from "@hooks/useSessionStorage";
+import { addUser } from "@redux/reducers/user/user.reducer";
+import { userService } from "@service/api/user/user.service";
+import { Utils } from "@service/utils/utils.service";
 
-const AdminRoute = () => {
-  const { user } = useSelector((state) => ({ ...state }));
-  console.log({ state: user });
-  const [ok, setOk] = useState(false);
+const AdminRoute = ({ children }) => {
+  const { profile, token } = useSelector((state) => state.user);
+  const [userData, setUserData] = useState(null);
+  const [tokenIsValid, setTokenIsValid] = useState(false);
+  const keepLoggedIn = useLocalStorage("keepLoggedIn", "get");
+  const pageReload = useSessionStorage("pageReload", "get");
+  const [deleteStorageUsername] = useLocalStorage("username", "delete");
+  const [setLoggedIn] = useLocalStorage("keepLoggedIn", "set");
+  const [deleteSessionPageReload] = useSessionStorage("pageReload", "delete");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (user && user.token) {
-      setOk(true);
+  const checkUser = useCallback(async () => {
+    try {
+      const response = await userService.checkCurrentUser();
+      setUserData(response.data.user);
+      setTokenIsValid(true);
+      dispatch(addUser({ token: response.data.token, profile: response.data.user }));
+    } catch (error) {
+      setTokenIsValid(false);
+      setTimeout(async () => {
+        Utils.clearStore({ dispatch, deleteStorageUsername, deleteSessionPageReload, setLoggedIn });
+        await userService.logoutUser();
+        navigate("/");
+      }, 1000);
     }
-  }, [user]);
+  }, [dispatch, navigate, deleteStorageUsername, deleteSessionPageReload, setLoggedIn]);
 
-  return ok ? <Outlet /> : <LoadingToRedirect />;
+  useEffectOnce(() => {
+    checkUser();
+  });
+
+  if (keepLoggedIn || (!keepLoggedIn && userData) || (profile && token) || pageReload) {
+    if (!tokenIsValid) {
+      return <></>;
+    } else {
+      return <>{children}</>;
+    }
+  } else {
+    return <>{<Navigate to="/" />}</>;
+  }
+};
+AdminRoute.propTypes = {
+  children: PropTypes.node.isRequired
 };
 
 export default AdminRoute;
-
-const LoadingToRedirect = () => {
-  const [count, setCount] = useState(5);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCount((currentCount) => --currentCount);
-    }, 1000);
-    // redirect once count is equal to 0
-    count === 0 && navigate("/");
-    // cleanup
-    return () => clearInterval(interval);
-  }, [count, navigate]);
-
-  return (
-    <div className="container p-5 text-center">
-      <p>Przekierowuje do strony głownej za {count} s</p>
-    </div>
-  );
-};
