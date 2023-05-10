@@ -47,7 +47,7 @@ function Header() {
         {token && (
           <>
             <li>
-              <Link to="/admin-dashboard">Admin</Link>
+              <Link to="/admin">Admin</Link>
             </li>
 
             <li>
