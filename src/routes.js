@@ -6,8 +6,10 @@ import Event from "@pages/events/Event";
 import AdminDashboard from "@pages/admin/AdminDashboard";
 import AdminRoute from "@pages/AdminRoute";
 import CreateEvent from "@pages/admin/events/CreateEvent";
-import Clients from "@pages/admin/clients/Clients";
+import AdminClients from "@pages/admin/clients/AdminClients";
 import EditClient from "@pages/admin/clients/EditClient";
+import AdminEvents from "@pages/admin/events/AdminEvents";
+import EditEvent from "@pages/admin/events/EditEvent";
 
 export const AppRouter = () => {
   const elements = useRoutes([
@@ -48,7 +50,7 @@ export const AppRouter = () => {
       )
     },
     {
-      path: "/admin/events",
+      path: "/admin/event/create",
       element: (
         <AdminRoute>
           <CreateEvent />
@@ -59,7 +61,7 @@ export const AppRouter = () => {
       path: "/admin/clients",
       element: (
         <AdminRoute>
-          <Clients />
+          <AdminClients />
         </AdminRoute>
       )
     },
@@ -70,7 +72,24 @@ export const AppRouter = () => {
           <EditClient />
         </AdminRoute>
       )
+    },
+    {
+      path: "/admin/events/list",
+      element: (
+        <AdminRoute>
+          <AdminEvents />
+        </AdminRoute>
+      )
+    },
+    {
+      path: "/admin/events/update/:eventId",
+      element: (
+        <AdminRoute>
+          <EditEvent />
+        </AdminRoute>
+      )
     }
+
     // {
     //   path: "*",
     //   element: <Error />

@@ -15,6 +15,11 @@ class EventService {
     const response = await axios.get(`/event/${eventId}`);
     return response;
   }
+
+  async updateEvent(eventId, body) {
+    const response = await axios.put(`/event/${eventId}`, body);
+    return response;
+  }
 }
 
 export const eventService = new EventService();

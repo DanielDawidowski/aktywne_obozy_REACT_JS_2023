@@ -70,7 +70,7 @@ function Event() {
 
   return (
     <Layout>
-      <h1>{event.event}</h1>
+      <h1>{event.name}</h1>
       <h1>{event.eventType}</h1>
 
       {hasError && errorMessage && <h4>{errorMessage}</h4>}

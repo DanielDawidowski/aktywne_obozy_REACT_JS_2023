@@ -10,10 +10,13 @@ function AdminDashboard() {
           <nav>
             <ul>
               <li style={{ marginBottom: "30px" }}>
-                <Link to="/admin/events">Stwórz wyjazd</Link>
+                <Link to="/admin/event/create">Stwórz wyjazd</Link>
               </li>
               <li style={{ marginBottom: "30px" }}>
                 <Link to="/admin/clients">Zgłoszenia</Link>
+              </li>
+              <li style={{ marginBottom: "30px" }}>
+                <Link to="/admin/events/list">Wyjazdy</Link>
               </li>
             </ul>
           </nav>

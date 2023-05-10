@@ -7,7 +7,7 @@ import Layout from "@components/layout/Layout";
 import { Link } from "react-router-dom";
 import { AiOutlineEdit } from "react-icons/ai";
 
-function Clients() {
+function AdminClients() {
   const [clients, setClients] = useState([]);
 
   const [currentPage] = useState(1);
@@ -46,4 +46,4 @@ function Clients() {
   );
 }
 
-export default Clients;
+export default AdminClients;

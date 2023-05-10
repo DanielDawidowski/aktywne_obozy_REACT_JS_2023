@@ -5,7 +5,7 @@ import Input from "@components/input/Input";
 import { eventService } from "@service/api/events/events.service";
 
 const initialState = {
-  event: "",
+  name: "",
   bgColor: "#4aa1f3",
   eventType: "gory",
   price: "1000",
@@ -20,7 +20,7 @@ function CreateEvent() {
   const [hasError, setHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const { event, bgColor, eventType, price, discountPrice, startDate, endDate } = values;
+  const { name, bgColor, eventType, price, discountPrice, startDate, endDate } = values;
 
   const createEvent = async (e) => {
     e.preventDefault();
@@ -46,10 +46,10 @@ function CreateEvent() {
       {hasError && errorMessage && <h4>{errorMessage}</h4>}
       <form>
         <Input
-          id="event"
-          name="event"
+          id="name"
+          name="name"
           type="text"
-          value={event}
+          value={name}
           labelText="Nazwa wyjazdu"
           placeholder="---"
           style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
@@ -98,7 +98,9 @@ function CreateEvent() {
         <div>
           <label>Kategoria</label>
           <select name="eventType" className="form-control" onChange={handleChange} defaultValue={eventType} required>
-            <option aria-disabled>Wybierz</option>
+            <option defaultChecked value="">
+              Wybierz
+            </option>
             <option value="gory">Góry</option>
             <option value="splywy">Spływy</option>
             <option value="morze">Morze</option>
@@ -108,7 +110,7 @@ function CreateEvent() {
         <Button
           label={`${loading ? "Wysyłanie..." : "Utwórz"}`}
           className="auth-button button"
-          disabled={!event || !bgColor || !eventType || !price || !discountPrice || !startDate || !endDate}
+          disabled={!name || !bgColor || !eventType || !price || !discountPrice || !startDate || !endDate}
           handleClick={createEvent}
         />
       </form>
