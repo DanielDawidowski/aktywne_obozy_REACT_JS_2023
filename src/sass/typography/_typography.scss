@@ -1,3 +1,4 @@
+@use "@sass/typography/media";
 @import url("https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap");
 
 html {
@@ -23,4 +24,13 @@ h6 {
 
 ul {
   list-style: none;
+}
+
+h3 {
+  @include media.min-width(xsmall) {
+    font-size: var(--size-4);
+  }
+  @include media.min-width(medium) {
+    font-size: var(--size-5);
+  }
 }

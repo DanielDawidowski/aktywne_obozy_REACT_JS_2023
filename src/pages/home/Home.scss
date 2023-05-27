@@ -1,0 +1,15 @@
+@use "@sass/typography/media";
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  &__carousel {
+    overflow: hidden;
+    @include media.min-width(medium) {
+      height: 80vh;
+    }
+  }
+}

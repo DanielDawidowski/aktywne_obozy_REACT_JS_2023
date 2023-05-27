@@ -11,7 +11,7 @@ import { Utils } from "@service/utils/utils.service";
 import "@pages/auth/login/Login.scss";
 
 const Login = () => {
-  const [username, setUsername] = useState("danielo");
+  const [username, setUsername] = useState("marcin");
   const [password, setPassword] = useState("qwerty");
   const [keepLoggedIn, setKeepLoggedIn] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -52,7 +52,7 @@ const Login = () => {
 
   useEffect(() => {
     if (loading && !user) return;
-    if (user) navigate("/");
+    if (user) navigate("/admin");
   }, [loading, user, navigate]);
 
   return (
