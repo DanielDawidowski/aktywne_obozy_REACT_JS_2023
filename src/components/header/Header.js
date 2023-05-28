@@ -7,6 +7,7 @@ import useLocalStorage from "@hooks/useLocalStorage";
 import useSessionStorage from "@hooks/useSessionStorage";
 import { userService } from "@service/api/user/user.service";
 import Logo from "@assets/Images/Logo.jpg";
+import "@components/header/Header.scss";
 
 function Header() {
   const { token } = useSelector((state) => state.user);
@@ -29,33 +30,38 @@ function Header() {
   };
 
   return (
-    <header className="container">
-      <ul style={{ display: "flex", justifyContent: "space-between" }}>
-        <li>
+    <header className="header">
+      <nav className="header__nav container">
+        <div className="header__logo">
           <Link to="/">
-            <img style={{ maxWidth: "50px" }} src={Logo} alt="logo" />
+            <img src={Logo} alt="logo" />
           </Link>
-        </li>
-        <li>
-          <Link to="/events">Events</Link>
-        </li>
-        {!token && (
+        </div>
+        <ul className="">
           <li>
-            <Link to="/app/login">Login</Link>
+            <Link to="/events">Events</Link>
           </li>
-        )}
-        {token && (
-          <>
+          <li>
+            <Link to="/contact">Kontakt</Link>
+          </li>
+          {!token && (
             <li>
-              <Link to="/admin">Admin</Link>
+              <Link to="/app/login">Login</Link>
             </li>
+          )}
+          {token && (
+            <>
+              <li>
+                <Link to="/admin">Admin</Link>
+              </li>
 
-            <li>
-              <MdLogout onClick={Logout} />
-            </li>
-          </>
-        )}
-      </ul>
+              <li>
+                <MdLogout onClick={Logout} />
+              </li>
+            </>
+          )}
+        </ul>
+      </nav>
     </header>
   );
 }

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 
-import Layout from "@components/layout/Layout";
 import { eventService } from "@service/api/events/events.service";
 import { Link } from "react-router-dom";
 
@@ -24,7 +23,7 @@ function AdminEvents() {
   }, [getAllEvents]);
 
   return (
-    <Layout>
+    <>
       {events.map((event, index) => (
         <div key={index}>
           {event.name}
@@ -33,7 +32,7 @@ function AdminEvents() {
           </Link>
         </div>
       ))}
-    </Layout>
+    </>
   );
 }
 

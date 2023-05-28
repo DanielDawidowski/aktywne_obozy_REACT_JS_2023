@@ -1,11 +1,12 @@
 import Layout from "@components/layout/Layout";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
+import "@pages/admin/AdminStyles.scss";
 
 function AdminDashboard() {
   return (
     <Layout>
-      <section id="admin" className="admin">
+      <section id="admin" className="admin container">
         <aside className="admin__nav">
           <nav>
             <ul>
@@ -21,7 +22,9 @@ function AdminDashboard() {
             </ul>
           </nav>
         </aside>
-        <main className="admin__main"></main>
+        <main className="admin__main">
+          <Outlet />
+        </main>
       </section>
     </Layout>
   );

@@ -5,6 +5,7 @@ import Button from "@components/button/Button";
 import Input from "@components/input/Input";
 import { eventService } from "@service/api/events/events.service";
 import { clientService } from "@service/api/clients/clients.service";
+import { GoBackButton } from "@components/go-back-button/goBackButton";
 
 const initialState = {
   eventId: "",
@@ -70,6 +71,8 @@ function Event() {
 
   return (
     <Layout>
+      <GoBackButton />
+
       <h1>{event.name}</h1>
       <h1>{event.eventType}</h1>
 

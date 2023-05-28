@@ -47,47 +47,29 @@ export const AppRouter = () => {
         <AdminRoute>
           <AdminDashboard />
         </AdminRoute>
-      )
-    },
-    {
-      path: "/admin/event/create",
-      element: (
-        <AdminRoute>
-          <CreateEvent />
-        </AdminRoute>
-      )
-    },
-    {
-      path: "/admin/clients",
-      element: (
-        <AdminRoute>
-          <AdminClients />
-        </AdminRoute>
-      )
-    },
-    {
-      path: "/admin/client/:clientId",
-      element: (
-        <AdminRoute>
-          <EditClient />
-        </AdminRoute>
-      )
-    },
-    {
-      path: "/admin/events/list",
-      element: (
-        <AdminRoute>
-          <AdminEvents />
-        </AdminRoute>
-      )
-    },
-    {
-      path: "/admin/events/update/:eventId",
-      element: (
-        <AdminRoute>
-          <EditEvent />
-        </AdminRoute>
-      )
+      ),
+      children: [
+        {
+          path: "event/create",
+          element: <CreateEvent />
+        },
+        {
+          path: "clients",
+          element: <AdminClients />
+        },
+        {
+          path: "client/:clientId",
+          element: <EditClient />
+        },
+        {
+          path: "events/list",
+          element: <AdminEvents />
+        },
+        {
+          path: "events/update/:eventId",
+          element: <EditEvent />
+        }
+      ]
     }
 
     // {

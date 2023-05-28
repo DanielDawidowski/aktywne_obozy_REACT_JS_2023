@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Layout from "@components/layout/Layout";
 import Button from "@components/button/Button";
 import Input from "@components/input/Input";
 import { eventService } from "@service/api/events/events.service";
@@ -42,7 +41,7 @@ function CreateEvent() {
   };
 
   return (
-    <Layout>
+    <>
       {hasError && errorMessage && <h4>{errorMessage}</h4>}
       <form>
         <Input
@@ -114,7 +113,7 @@ function CreateEvent() {
           handleClick={createEvent}
         />
       </form>
-    </Layout>
+    </>
   );
 }
 

@@ -5,7 +5,6 @@ import Input from "@components/input/Input";
 import Button from "@components/button/Button";
 import { useParams } from "react-router-dom";
 import { clientService } from "@service/api/clients/clients.service";
-import Layout from "@components/layout/Layout";
 import { eventService } from "@service/api/events/events.service";
 
 // const accpOpen = {
@@ -111,7 +110,7 @@ const EditClient = (index) => {
   }, [getClient]);
 
   return (
-    <Layout>
+    <>
       <motion.div>
         <h3>{client.name}</h3>
         {/* <AiOutlineEdit onClick={() => handleAccordion(index)} /> */}
@@ -210,7 +209,7 @@ const EditClient = (index) => {
           </form>
         </div>
       </motion.div>
-    </Layout>
+    </>
   );
 };
 export default EditClient;

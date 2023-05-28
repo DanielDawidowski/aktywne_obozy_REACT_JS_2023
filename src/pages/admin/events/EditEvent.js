@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from "react";
-import Layout from "@components/layout/Layout";
 import { useParams } from "react-router-dom";
 import Input from "@components/input/Input";
 import Button from "@components/button/Button";
@@ -59,7 +58,7 @@ function EditEvent() {
     // console.log(e.target.name, " ---- ", e.target.value);
   };
   return (
-    <Layout>
+    <>
       {showEvent.name}
       <div style={{ marginTop: "20px" }}>
         {hasError && errorMessage && <h4>{errorMessage}</h4>}
@@ -137,7 +136,7 @@ function EditEvent() {
           />
         </form>
       </div>
-    </Layout>
+    </>
   );
 }
 
