@@ -1,0 +1,43 @@
+.divider {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  &__left {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: var(--size-1);
+
+    span {
+      background-color: #f3722c;
+      width: 70%;
+      height: 2px;
+      border-radius: 18px 0 0 18px;
+    }
+  }
+  &__center {
+    width: 20px;
+    height: 20px;
+    display: grid;
+    place-items: center;
+    span {
+      width: 15px;
+      height: 15px;
+      background-color: #f3722c;
+      border-radius: 50%;
+    }
+  }
+  &__right {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: var(--size-1);
+    span {
+      background-color: #f3722c;
+      width: 70%;
+      height: 2px;
+      border-radius: 0 18px 18px 0;
+    }
+  }
+}

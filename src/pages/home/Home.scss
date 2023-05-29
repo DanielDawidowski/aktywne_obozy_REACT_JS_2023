@@ -20,14 +20,21 @@
   }
 
   &__events {
-    img {
-      border-top: 1px solid var(--black-1);
-      border-bottom: 1px solid var(--black-1);
-    }
-    h2 {
-      letter-spacing: 0.05em;
-      text-align: center;
-      padding: var(--size-7) var(--size-3);
+    padding-bottom: var(--size-7);
+    &--item {
+      border: 1px solid var(--black-1);
+      border-radius: 18px;
+      margin: 0 var(--size-1) var(--size-7) var(--size-1);
+      img {
+        border-top: 1px solid var(--black-1);
+        border-bottom: 1px solid var(--black-1);
+        border-radius: 18px 18px 0 0;
+      }
+      h2 {
+        letter-spacing: 0.05em;
+        text-align: center;
+        padding: var(--size-7) var(--size-3);
+      }
     }
   }
 }

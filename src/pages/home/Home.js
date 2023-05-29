@@ -14,6 +14,7 @@ import "@pages/home/Home.scss";
 import Carousel from "@components/carousel/Carousel";
 import ScrollText from "@components/scroll-text/ScrollText";
 import Dots from "@assets/SVG/Dots";
+import Divider from "@components/divider/Divider";
 
 const homeSlides = [
   {
@@ -51,6 +52,7 @@ const Home = () => {
             <img src={Home4} />
           </motion.div>
         </motion.div>
+        <Divider />
         <motion.div className="home__scroll">
           <ScrollText />
         </motion.div>
@@ -63,6 +65,7 @@ const Home = () => {
                 Każdy wyjazd w góry to cały dzień w <span className="text__decoration">Energylandii</span>
               </h2>
             </div>
+            <Divider />
           </div>
           <div className="home__events--item">
             <img src={Home6} alt="energylandia" />
@@ -72,6 +75,7 @@ const Home = () => {
                 Zima to czas <span className="text__decoration">na ferie</span> w górach
               </h2>
             </div>
+            <Divider />
           </div>
         </motion.div>
       </motion.div>
