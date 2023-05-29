@@ -6,10 +6,9 @@ import { Utils } from "@service/utils/utils.service";
 import useLocalStorage from "@hooks/useLocalStorage";
 import useSessionStorage from "@hooks/useSessionStorage";
 import { userService } from "@service/api/user/user.service";
-import Logo from "@assets/Images/Logo.jpg";
-import "@components/header/Header.scss";
+import "@components/navs/menu/Menu.scss";
 
-function Header() {
+function Menu() {
   const { token } = useSelector((state) => state.user);
   const [deleteStorageUsername] = useLocalStorage("username", "delete");
   const [setLoggedIn] = useLocalStorage("keepLoggedIn", "set");
@@ -28,42 +27,32 @@ function Header() {
       Utils.dispatchNotification(error.response.data.message, "error", dispatch);
     }
   };
-
   return (
-    <header className="header">
-      <nav className="header__nav container">
-        <div className="header__logo">
-          <Link to="/">
-            <img src={Logo} alt="logo" />
-          </Link>
-        </div>
-        <ul className="">
+    <ul className="menu">
+      <li>
+        <Link to="/events">Wyjazdy</Link>
+      </li>
+      <li>
+        <Link to="/contact">Kontakt</Link>
+      </li>
+      {!token && (
+        <li>
+          <Link to="/app/login">Login</Link>
+        </li>
+      )}
+      {token && (
+        <>
           <li>
-            <Link to="/events">Events</Link>
+            <Link to="/admin">Admin</Link>
           </li>
-          <li>
-            <Link to="/contact">Kontakt</Link>
-          </li>
-          {!token && (
-            <li>
-              <Link to="/app/login">Login</Link>
-            </li>
-          )}
-          {token && (
-            <>
-              <li>
-                <Link to="/admin">Admin</Link>
-              </li>
 
-              <li>
-                <MdLogout onClick={Logout} />
-              </li>
-            </>
-          )}
-        </ul>
-      </nav>
-    </header>
+          <li>
+            <MdLogout onClick={Logout} />
+          </li>
+        </>
+      )}
+    </ul>
   );
 }
 
-export default Header;
+export default Menu;
