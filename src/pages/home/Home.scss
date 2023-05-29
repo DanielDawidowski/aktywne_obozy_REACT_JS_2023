@@ -1,15 +1,44 @@
 @use "@sass/typography/media";
 
 .home {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   height: 100vh;
+
   &__carousel {
     overflow: hidden;
+    height: 25vh;
     @include media.min-width(medium) {
       height: 80vh;
     }
+  }
+
+  &__icons {
+  }
+
+  &__scroll {
+    height: 20vh;
+  }
+
+  &__events {
+    img {
+      border-top: 1px solid var(--black-1);
+      border-bottom: 1px solid var(--black-1);
+    }
+    h2 {
+      letter-spacing: 0.05em;
+      text-align: center;
+      padding: var(--size-7) var(--size-3);
+    }
+  }
+}
+
+.title__dots {
+  position: relative;
+  svg {
+    position: absolute;
+    bottom: 50%;
+    width: 50px;
+    height: 50px;
+    right: 10%;
+    z-index: -1;
   }
 }

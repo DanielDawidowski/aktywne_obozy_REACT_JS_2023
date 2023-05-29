@@ -9,6 +9,7 @@ import { GoBackButton } from "@components/go-back-button/goBackButton";
 
 const initialState = {
   eventId: "",
+  eventName: "",
   name: "",
   email: "",
   tel: "",
@@ -40,6 +41,7 @@ function Event() {
   const createClient = async (e) => {
     e.preventDefault();
     values.eventId = eventId;
+    values.eventName = event.name;
     try {
       const response = await clientService.createClient(values);
       setLoading(false);
@@ -71,82 +73,84 @@ function Event() {
 
   return (
     <Layout>
-      <GoBackButton />
+      <section className="container">
+        <GoBackButton />
 
-      <h1>{event.name}</h1>
-      <h1>{event.eventType}</h1>
+        <h1>{event.name}</h1>
+        <h1>{event.eventType}</h1>
 
-      {hasError && errorMessage && <h4>{errorMessage}</h4>}
-      <form>
-        <Input
-          id="name"
-          name="name"
-          type="text"
-          value={name}
-          labelText="Imię i Nazwisko"
-          placeholder="---"
-          style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
-          handleChange={handleChange}
-        />
-        <Input
-          id="email"
-          name="email"
-          type="text"
-          value={email}
-          labelText="Email"
-          placeholder="---"
-          style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
-          handleChange={handleChange}
-        />
-        <Input
-          id="tel"
-          name="tel"
-          type="text"
-          value={tel}
-          labelText="Telefon"
-          placeholder="---"
-          style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
-          handleChange={handleChange}
-        />
-        <Input
-          id="birthDate"
-          name="birthDate"
-          type="text"
-          value={birthDate}
-          labelText="Data Urodzenia"
-          placeholder="---"
-          style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
-          handleChange={handleChange}
-        />
-        <Input
-          id="price"
-          name="price"
-          type="checkbox"
-          value={price}
-          labelText={event.price}
-          placeholder="---"
-          style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
-          handleChange={handleChange}
-          checked={checked === "price"}
-        />
-        <Input
-          id="discountPrice"
-          name="discountPrice"
-          type="checkbox"
-          value={price}
-          labelText={event.discountPrice}
-          placeholder="---"
-          style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
-          handleChange={handleChange}
-          checked={checked === "discountPrice"}
-        />
-        <Button
-          label={`${loading ? "Wysyłanie..." : "Wyślij"}`}
-          className="auth-button button"
-          disabled={!name || !email || !tel || !birthDate || !price}
-          handleClick={createClient}
-        />
-      </form>
+        {hasError && errorMessage && <h4>{errorMessage}</h4>}
+        <form>
+          <Input
+            id="name"
+            name="name"
+            type="text"
+            value={name}
+            labelText="Imię i Nazwisko"
+            placeholder="---"
+            style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
+            handleChange={handleChange}
+          />
+          <Input
+            id="email"
+            name="email"
+            type="text"
+            value={email}
+            labelText="Email"
+            placeholder="---"
+            style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
+            handleChange={handleChange}
+          />
+          <Input
+            id="tel"
+            name="tel"
+            type="text"
+            value={tel}
+            labelText="Telefon"
+            placeholder="---"
+            style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
+            handleChange={handleChange}
+          />
+          <Input
+            id="birthDate"
+            name="birthDate"
+            type="date"
+            value={birthDate}
+            labelText="Data Urodzenia"
+            placeholder="---"
+            style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
+            handleChange={handleChange}
+          />
+          <Input
+            id="price"
+            name="price"
+            type="checkbox"
+            value={price}
+            labelText={event.price}
+            placeholder="---"
+            style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
+            handleChange={handleChange}
+            checked={checked === "price"}
+          />
+          <Input
+            id="discountPrice"
+            name="discountPrice"
+            type="checkbox"
+            value={price}
+            labelText={event.discountPrice}
+            placeholder="---"
+            style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
+            handleChange={handleChange}
+            checked={checked === "discountPrice"}
+          />
+          <Button
+            label={`${loading ? "Wysyłanie..." : "Wyślij"}`}
+            className="auth-button button"
+            disabled={!name || !email || !tel || !birthDate || !price}
+            handleClick={createClient}
+          />
+        </form>
+      </section>
     </Layout>
   );
 }

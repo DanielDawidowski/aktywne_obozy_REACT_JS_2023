@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from "prop-types";
-// import Carousel from "@components/carousel/Carousel";
+import "@components/carousel/Carousel.scss";
 
 const carouselVariants = {
   initial: (direction) => {

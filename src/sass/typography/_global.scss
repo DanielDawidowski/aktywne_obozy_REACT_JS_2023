@@ -24,3 +24,23 @@ body {
   display: grid;
   place-items: center;
 }
+
+img {
+  width: 100%;
+}
+
+.text__decoration {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 10%;
+    left: -5%;
+    width: 110%;
+    height: var(--size-2);
+    background: var(--orange-1);
+    z-index: -1;
+    border-radius: 18px;
+  }
+}
