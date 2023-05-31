@@ -5,7 +5,7 @@ import Layout from "@components/layout/Layout";
 import Home1 from "@assets/Images/filip-mroz-zK049OFP4uI-unsplash 4.jpg";
 import Home2 from "@assets/Images/sporty_zimowe.jpg";
 import Home3 from "@assets/Images/tatry.jpg";
-import Home4 from "@assets/Images/home_icons.jpg";
+// import Home4 from "@assets/Images/home_icons.jpg";
 import Home5 from "@assets/Images/energylandia.jpg";
 import Home6 from "@assets/Images/narty.jpg";
 
@@ -15,6 +15,8 @@ import Carousel from "@components/carousel/Carousel";
 import ScrollText from "@components/scroll-text/ScrollText";
 import Dots from "@assets/SVG/Dots";
 import Divider from "@components/divider/Divider";
+import { Link } from "react-router-dom";
+import Image from "@components/image/Image";
 
 const homeSlides = [
   {
@@ -49,7 +51,9 @@ const Home = () => {
         </motion.div>
         <motion.div>
           <motion.div className="home__icons">
-            <img src={Home4} />
+            <Link to="/events">
+              <h1>Zobacz</h1>
+            </Link>
           </motion.div>
         </motion.div>
         <Divider />
@@ -58,7 +62,7 @@ const Home = () => {
         </motion.div>
         <motion.div className="home__events">
           <div className="home__events--item">
-            <img src={Home5} alt="energylandia" />
+            <Image src={Home5} alt="energylandia" />
             <div className="title__dots">
               <Dots color={"#4d908e"} />
               <h2>
@@ -68,7 +72,7 @@ const Home = () => {
             <Divider />
           </div>
           <div className="home__events--item">
-            <img src={Home6} alt="energylandia" />
+            <Image src={Home6} alt="energylandia" />
             <div className="title__dots">
               <Dots color={"#4d908e"} />
               <h2>
