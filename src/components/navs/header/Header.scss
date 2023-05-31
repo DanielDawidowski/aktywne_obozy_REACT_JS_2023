@@ -3,6 +3,7 @@
 .header {
   z-index: 1;
   width: 100%;
+  border-bottom: 1px solid var(--black-1);
   &__nav {
     display: flex;
     justify-content: space-between;

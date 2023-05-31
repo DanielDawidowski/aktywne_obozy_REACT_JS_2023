@@ -7,23 +7,12 @@ import { useParams } from "react-router-dom";
 import { clientService } from "@service/api/clients/clients.service";
 import { eventService } from "@service/api/events/events.service";
 
-// const accpOpen = {
-//   margin: "10px auto",
-//   height: "0px",
-//   overflow: "hidden"
-// };
-
-// const accpClose = {
-//   margin: "10px auto",
-//   height: "100%"
-// };
-
 const initialState = {
   eventId: "",
-  name: "Gucio",
-  email: "qweqwe@wp.pl",
-  tel: "6445588776",
-  birthDate: "24.06.1998",
+  name: "",
+  email: "",
+  tel: "",
+  birthDate: "",
   price: ""
 };
 
@@ -113,8 +102,6 @@ const EditClient = (index) => {
     <>
       <motion.div>
         <h3>{client.name}</h3>
-        {/* <AiOutlineEdit onClick={() => handleAccordion(index)} /> */}
-        {/* <div style={openAccordion !== index ? accpOpen : accpClose}> */}
         <div>
           {hasError && errorMessage && <h4>{errorMessage}</h4>}
           <form>
@@ -164,9 +151,7 @@ const EditClient = (index) => {
               </option>
               {events.map((event, index) => (
                 <option key={index} value={event._id}>
-                  <>
-                    {event.event}----{event._id}
-                  </>
+                  {event.name}
                 </option>
               ))}
             </select>
@@ -185,18 +170,19 @@ const EditClient = (index) => {
                       handleChange={handleChange}
                       checked={checked === "price"}
                     />
-
-                    <Input
-                      id="discountPrice"
-                      name="discountPrice"
-                      type="checkbox"
-                      value={price}
-                      labelText={event.discountPrice}
-                      placeholder="---"
-                      style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
-                      handleChange={handleChange}
-                      checked={checked === "discountPrice"}
-                    />
+                    {event.discountPrice && (
+                      <Input
+                        id="discountPrice"
+                        name="discountPrice"
+                        type="checkbox"
+                        value={price}
+                        labelText={event.discountPrice}
+                        placeholder="---"
+                        style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
+                        handleChange={handleChange}
+                        checked={checked === "discountPrice"}
+                      />
+                    )}
                   </div>
                 )
             )}
