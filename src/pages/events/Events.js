@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { eventService } from "@service/api/events/events.service";
 import Layout from "@components/layout/Layout";
-import { Icons } from "@service/utils/icons.service";
 import Events1 from "@assets/Images/morskie_2023.jpg";
 import Events2 from "@assets/Images/krakow_2023.jpg";
 import Events3 from "@assets/Images/gory_2023.jpg";
 import Carousel from "@components/carousel/Carousel";
 import "@pages/events/Events.scss";
-import { BsCalendar2Week } from "react-icons/bs";
+import { EventUtils } from "@service/utils/event-utils.service";
+import Calendar from "@assets/SVG/calendar";
+import { TimeAgo } from "@service/utils/timeago.utils";
 
 const eventSlides = [
   {
@@ -43,27 +44,11 @@ function Events() {
 
   useEffect(() => {
     getAllEvents();
+    if (events) {
+      console.log("events", events);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getAllEvents]);
-
-  const showEventIcon = (type) => {
-    const obj = [];
-    for (let i = 0; i < Icons.length; i++) {
-      if (Icons[i].name === type) {
-        obj.push(Icons[i].icon);
-      }
-    }
-    return obj[0];
-  };
-
-  const showEventColor = (type) => {
-    const obj = [];
-    for (let i = 0; i < Icons.length; i++) {
-      if (Icons[i].name === type) {
-        obj.push(Icons[i].color);
-      }
-    }
-    return obj[0];
-  };
 
   const handleToggle = (name) => {
     setToggle(toggle !== name ? name : null);
@@ -78,11 +63,15 @@ function Events() {
         className="events"
       >
         {events.map((event) => (
-          <motion.div key={event._id} className="events__item" style={{ background: showEventColor(event.eventType) }}>
+          <motion.div
+            key={event._id}
+            className="events__item"
+            style={{ background: EventUtils.showEventColor(event.eventType) }}
+          >
             <motion.div className="events__item--inner">
               {toggle !== event.name && (
                 <motion.div onClick={() => handleToggle(event.name)} className="events__item--header">
-                  <img src={showEventIcon(event.eventType)} alt={event.name} />
+                  <img src={EventUtils.showEventIcon(event.eventType)} alt={event.name} />
                   <div>
                     <h3>{event.name}</h3>
                     <h3>
@@ -107,17 +96,17 @@ function Events() {
                   <h3 onClick={() => handleToggle(event.name)}>{event.name}</h3>
                   <div className="events__item--calendars">
                     <div className="events__item--calendar">
-                      <BsCalendar2Week style={{ color: "green" }} />
+                      <Calendar color="#5cb85c" />
                       <div>
                         <h3 style={{ color: "green" }}>Zaczynamy</h3>
-                        <h3>{event.startDate}</h3>
+                        <h3>{TimeAgo.dayMonthYear(event.startDate)}</h3>
                       </div>
                     </div>
                     <div className="events__item--calendar">
-                      <BsCalendar2Week style={{ color: "red" }} />
+                      <Calendar color="#f94144" />
                       <div>
                         <h3 style={{ color: "red" }}>Kończymy</h3>
-                        <h3>{event.endDate}</h3>
+                        <h3>{TimeAgo.dayMonthYear(event.endDate)}</h3>
                       </div>
                     </div>
                   </div>
@@ -126,7 +115,7 @@ function Events() {
             </motion.div>
             {toggle === event.name && (
               <motion.div className="events__item--footer">
-                <img src={showEventIcon(event.eventType)} alt={event.name} />
+                <img src={EventUtils.showEventIcon(event.eventType)} alt={event.name} />
                 <Link to={`/event/${event._id}`}>Zobacz</Link>
               </motion.div>
             )}

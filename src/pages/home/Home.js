@@ -72,7 +72,7 @@ const Home = () => {
             <Divider />
           </div>
           <div className="home__events--item">
-            <Image src={Home6} alt="energylandia" />
+            <Image src={Home6} alt="gory" />
             <div className="title__dots">
               <Dots color={"#4d908e"} />
               <h2>

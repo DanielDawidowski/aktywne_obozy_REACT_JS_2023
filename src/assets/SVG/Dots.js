@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const Dots = ({ color = "#ffffff" }) => {
   return (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill={color} xmlns="http://www.w3.org/2000/svg">
+    <svg width="36" height="36" className="dots" viewBox="0 0 36 36" fill={color} xmlns="http://www.w3.org/2000/svg">
       <circle cx="1.32353" cy="1.32353" r="1.32353" fill={color} />
       <circle cx="1.32353" cy="20.3824" r="1.32353" fill={color} />
       <circle cx="1.32353" cy="10.8531" r="1.32353" fill={color} />
