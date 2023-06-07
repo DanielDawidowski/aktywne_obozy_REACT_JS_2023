@@ -1,5 +1,8 @@
 import React, { useCallback, useState } from "react";
 import { useParams } from "react-router-dom";
+import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { BsInfoSquare } from "react-icons/bs";
 import Layout from "@components/layout/Layout";
 import Button from "@components/button/Button";
 import Input from "@components/input/Input";
@@ -25,7 +28,7 @@ import TransportSVG from "@assets/SVG/transport";
 import InsurenceSVG from "@assets/SVG/insurence";
 import "@pages/events/Event.scss";
 import Calendar from "@assets/SVG/calendar";
-import { BsInfoSquare } from "react-icons/bs";
+import { Utils } from "@service/utils/utils.service";
 
 // import Dots from "@assets/SVG/Dots";
 
@@ -46,6 +49,7 @@ function Event() {
   const [hasError, setHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [checked, setChecked] = useState("");
+  const dispatch = useDispatch();
 
   const { eventType, address } = event;
 
@@ -68,15 +72,18 @@ function Event() {
     values.eventName = event.name;
     try {
       const response = await clientService.createClient(values);
+      Utils.dispatchNotification(response.data.message, "success", dispatch);
       setLoading(false);
       setHasError(false);
       setValues(initialState);
       setChecked("");
+      console.log("response", response);
       return response;
     } catch (error) {
       setLoading(false);
       setHasError(true);
       setErrorMessage(error?.response?.data.message);
+      Utils.dispatchNotification(error.response.data.message, "error", dispatch);
     }
   };
 
@@ -92,10 +99,6 @@ function Event() {
 
   useEffectOnce(() => {
     getEvent();
-    console.log("event", event);
-
-    console.log("event.startDate", new Date(event.startDate));
-    console.log("event.endDate", event.endDate);
   });
 
   return (
@@ -210,127 +213,134 @@ function Event() {
         </div>
         {hasError && errorMessage && <h4>{errorMessage}</h4>}
         <div className="event__form">
-          <div className="event__form--wrapper">
-            <div className="event__form--wrapper--header">
-              <h1>{event.name}</h1>
-              <ul className="event__form--dates">
-                <li>
-                  <Calendar color="#5cb85c" />
-                  <div>
-                    <h5>Zaczynamy</h5>
-                    {event.startDate && <h4>{TimeAgo.dayMonthYear(event.startDate)}</h4>}
-                  </div>
-                </li>
-                <li>
-                  <Calendar color="#f94144" />
-                  <div>
-                    <h5>Kończymy</h5>
-                    {event.endDate && <h4>{TimeAgo.dayMonthYear(event.endDate)}</h4>}
-                  </div>
-                </li>
-              </ul>
-              <h2 className="event__form--price">{event.discountPrice} PLN</h2>
-            </div>
-
-            <form>
-              <div className="form__wrapper">
-                <Input
-                  id="name"
-                  name="name"
-                  type="text"
-                  value={name}
-                  labelText="Imię i Nazwisko"
-                  placeholder="---"
-                  style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
-                  handleChange={handleChange}
-                />
-                <Input
-                  id="email"
-                  name="email"
-                  type="text"
-                  value={email}
-                  labelText="Email"
-                  placeholder="---"
-                  style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
-                  handleChange={handleChange}
-                />
-                <Input
-                  id="tel"
-                  name="tel"
-                  type="text"
-                  value={tel}
-                  labelText="Telefon"
-                  placeholder="---"
-                  style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
-                  handleChange={handleChange}
-                />
-                <Input
-                  id="birthDate"
-                  name="birthDate"
-                  type="date"
-                  value={birthDate}
-                  labelText="Data Urodzenia"
-                  placeholder="---"
-                  style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
-                  handleChange={handleChange}
-                />
-
-                <div className="event__form--checkbox">
-                  <Input
-                    id="price"
-                    name="price"
-                    type="checkbox"
-                    value={price}
-                    labelText={
-                      <h5 style={{ color: checked === "price" ? "#f3722c" : "#333333" }}>
-                        {`${event.price} PLN ${checked === "price" ? " cena bez dofinansowaniem KRUS" : ""}`}{" "}
-                      </h5>
-                    }
-                    placeholder="---"
-                    style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
-                    handleChange={handleChange}
-                    checked={checked === "price"}
-                  />
-                </div>
-                <div className="event__form--checkbox">
-                  <Input
-                    id="discountPrice"
-                    name="discountPrice"
-                    type="checkbox"
-                    value={price}
-                    labelText={
-                      <h5 style={{ color: checked === "discountPrice" ? "#f3722c" : "#333333" }}>{`${
-                        event.discountPrice
-                      } PLN ${checked === "discountPrice" ? "cena z dofinansowaniem KRUS" : ""}`}</h5>
-                    }
-                    placeholder="---"
-                    style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
-                    handleChange={handleChange}
-                    checked={checked === "discountPrice"}
-                  />
-                </div>
-                {checked === "discountPrice" && (
-                  <div className="event__form--info">
-                    <BsInfoSquare style={{ fill: "#f94144" }} />
-                    <p>
-                      Z wypoczynku letniego mogą skorzystać dzieci i młodzież z terenu województwa warmińsko-
-                      mazurskiego i podlaskiego urodzonych po 1 stycznia 2007 r., których co najmniej jedno z rodziców
-                      lub prawnych opiekunów jest ubezpieczone w pełnym zakresie (jednocześnie posiada ubezpieczenie
-                      emerytalną – rentowe oraz wypadkowe, chorobowe i macierzyńskie) lub pobiera rentę bądź emeryturę z
-                      Kasy Rolniczego Ubezpieczenia Społecznego.
-                    </p>
-                  </div>
-                )}
+          <div className="event__form--inner">
+            <div className="event__form--wrapper">
+              <div className="event__form--wrapper--header">
+                <h1>{event.name}</h1>
+                <ul className="event__form--dates">
+                  <li>
+                    <Calendar color="#5cb85c" />
+                    <div>
+                      <h5>Zaczynamy</h5>
+                      {event.startDate && <h4>{TimeAgo.dayMonthYear(event.startDate)}</h4>}
+                    </div>
+                  </li>
+                  <li>
+                    <Calendar color="#f94144" />
+                    <div>
+                      <h5>Kończymy</h5>
+                      {event.endDate && <h4>{TimeAgo.dayMonthYear(event.endDate)}</h4>}
+                    </div>
+                  </li>
+                </ul>
+                <h2 className="event__form--price">{event.discountPrice} PLN</h2>
               </div>
-            </form>
-          </div>
-          <div className="event__form--buttons">
-            <Button
-              label={`${loading ? "Wysyłanie..." : "Wyślij"}`}
-              className="auth-button button"
-              disabled={!name || !email || !tel || !birthDate || !price}
-              handleClick={createClient}
-            />
+
+              <form>
+                <div className="form__wrapper">
+                  <Input
+                    id="name"
+                    name="name"
+                    type="text"
+                    value={name}
+                    labelText="Imię i Nazwisko"
+                    placeholder="---"
+                    style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
+                    handleChange={handleChange}
+                  />
+                  <Input
+                    id="email"
+                    name="email"
+                    type="text"
+                    value={email}
+                    labelText="Email"
+                    placeholder="---"
+                    style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
+                    handleChange={handleChange}
+                  />
+                  <Input
+                    id="tel"
+                    name="tel"
+                    type="text"
+                    value={tel}
+                    labelText="Telefon"
+                    placeholder="---"
+                    style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
+                    handleChange={handleChange}
+                  />
+                  <Input
+                    id="birthDate"
+                    name="birthDate"
+                    type="date"
+                    value={birthDate}
+                    labelText="Data Urodzenia"
+                    placeholder="---"
+                    style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
+                    handleChange={handleChange}
+                  />
+
+                  <div className="event__form--checkbox">
+                    <Input
+                      id="price"
+                      name="price"
+                      type="checkbox"
+                      value={price}
+                      labelText={
+                        <h5 style={{ color: checked === "price" ? "#f3722c" : "#333333" }}>
+                          {`${event.price} PLN ${checked === "price" ? " cena bez dofinansowaniem KRUS" : ""}`}{" "}
+                        </h5>
+                      }
+                      placeholder="---"
+                      style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
+                      handleChange={handleChange}
+                      checked={checked === "price"}
+                    />
+                  </div>
+                  <div className="event__form--checkbox">
+                    <Input
+                      id="discountPrice"
+                      name="discountPrice"
+                      type="checkbox"
+                      value={price}
+                      labelText={
+                        <h5 style={{ color: checked === "discountPrice" ? "#f3722c" : "#333333" }}>{`${
+                          event.discountPrice
+                        } PLN ${checked === "discountPrice" ? "cena z dofinansowaniem KRUS" : ""}`}</h5>
+                      }
+                      placeholder="---"
+                      style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
+                      handleChange={handleChange}
+                      checked={checked === "discountPrice"}
+                    />
+                  </div>
+                  {checked === "discountPrice" && (
+                    <motion.div
+                      className="event__form--info"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: checked === "discountPrice" && "100%" }}
+                      exit={{ opacity: 0, height: 0 }}
+                    >
+                      <BsInfoSquare style={{ fill: "#f94144" }} />
+                      <p>
+                        Z wypoczynku letniego mogą skorzystać dzieci i młodzież z terenu województwa warmińsko-
+                        mazurskiego i podlaskiego urodzonych po 1 stycznia 2007 r., których co najmniej jedno z rodziców
+                        lub prawnych opiekunów jest ubezpieczone w pełnym zakresie (jednocześnie posiada ubezpieczenie
+                        emerytalną – rentowe oraz wypadkowe, chorobowe i macierzyńskie) lub pobiera rentę bądź emeryturę
+                        z Kasy Rolniczego Ubezpieczenia Społecznego.
+                      </p>
+                    </motion.div>
+                  )}
+                </div>
+              </form>
+            </div>
+            <div className="event__form--buttons">
+              <Button
+                label={`${loading ? "Wysyłanie..." : "Wyślij"}`}
+                className="auth-button button"
+                disabled={!name || !email || !tel || !birthDate || !price}
+                handleClick={createClient}
+              />
+            </div>
           </div>
         </div>
       </section>

@@ -4,20 +4,19 @@
   margin: var(--size-5) 0;
   @include media.min-width(medium) {
     margin: var(--size-7) 0;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
   }
   &__back {
     margin-left: var(--size-2);
     margin-top: var(--size-5);
     @include media.min-width(medium) {
       display: none;
+      margin-bottom: var(--size-7);
     }
     svg {
       width: 38px;
       height: 38px;
-    }
-
-    @include media.min-width(medium) {
-      margin-bottom: var(--size-7);
     }
   }
   &__body {
@@ -259,16 +258,28 @@
   }
   &__form {
     margin: 0 var(--size-2);
-    background: var(--green-1);
-    padding: var(--size-2);
-    border-radius: 18px;
+    @include media.min-width(medium) {
+      margin-top: var(--size-2);
+    }
+    &--inner {
+      background: var(--green-1);
+      padding: var(--size-2);
+      border-radius: 18px;
+      @include media.min-width(medium) {
+        position: fixed;
+      }
+    }
     &--wrapper {
       background: var(--white-1);
       border-radius: 18px;
+
       &--header {
         text-align: center;
         h1 {
           padding: var(--size-4) 0;
+          @include media.min-width(medium) {
+            padding: var(--size-3) 0;
+          }
         }
       }
       form {
@@ -280,7 +291,7 @@
     &--dates {
       display: flex;
       justify-content: space-around;
-      padding: var(--size-5) 0;
+      padding: var(--size-1) 0;
       li {
         display: flex;
         svg {
@@ -321,8 +332,9 @@
         display: flex;
         justify-content: flex-end;
         flex-direction: row-reverse;
-        padding-bottom: var(--size-5);
-        margin-top: var(--size-5);
+        padding-bottom: var(--size-5) 0;
+        margin-top: var(--size-2);
+
         input[type="checkbox"] {
           width: 23px;
           height: 23px;
@@ -337,7 +349,7 @@
     &--info {
       padding: var(--size-2);
       display: flex;
-      justify-content: space-between;
+      max-width: 345px;
       svg {
         width: 25px;
         height: 25px;
