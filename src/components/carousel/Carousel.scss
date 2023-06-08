@@ -19,11 +19,18 @@
       }
       h3 {
         color: var(--yellow-1);
+        letter-spacing: 3px;
         text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+        @include media.min-width(medium) {
+          font-size: var(--size-6);
+        }
       }
     }
     &--slider {
       position: relative;
+      img {
+        width: 100%;
+      }
     }
   }
 }

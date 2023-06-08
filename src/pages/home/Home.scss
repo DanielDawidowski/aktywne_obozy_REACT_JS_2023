@@ -5,9 +5,33 @@
 
   &__carousel {
     overflow: hidden;
-    height: 25vh;
-    @include media.min-width(medium) {
-      height: 80vh;
+
+    &--small {
+      display: block;
+      height: 25vh;
+
+      @include media.min-width(medium) {
+        display: none;
+      }
+    }
+    &--big {
+      display: none;
+      .carousel {
+        img {
+          background-position: top;
+          background-size: cover;
+        }
+      }
+      @include media.min-width(small) {
+        height: 45vh;
+      }
+      @include media.min-width(medium) {
+        display: block;
+        height: 60vh;
+      }
+      @include media.min-width(large) {
+        height: 85vh;
+      }
     }
   }
 
@@ -15,23 +39,25 @@
     padding-top: var(--size-4);
     background: url("../../assets/Images/home_icons.jpg");
     background-size: cover;
-    height: 10vh;
+    height: 13vh;
     margin: var(--size-4) 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    @include media.min-width(small) {
+      height: 18vh;
+    }
     @include media.min-width(medium) {
       background: url("../../assets/Images/home_icons-big.jpg");
       height: 20vh;
       margin-top: var(--size-7);
     }
+
     a {
       display: grid;
       place-items: center;
-      width: 100%;
-      height: 100%;
-      h1 {
-        background: #f7b12450;
+      h2 {
+        background: var(--white-1);
         border-radius: 18px;
         letter-spacing: 0.1em;
         padding: var(--size-1) var(--size-5);
@@ -44,23 +70,63 @@
 
   &__scroll {
     height: 20vh;
+    margin: var(--size-1) 0;
+    @include media.min-width(medium) {
+      margin: var(--size-8) 0;
+    }
   }
 
   &__events {
-    padding-bottom: var(--size-7);
+    padding: var(--size-1) 0;
+    @include media.min-width(medium) {
+      padding: 0 var(--size-1);
+    }
     &--item {
       border: 1px solid var(--black-1);
       border-radius: 18px;
-      margin: 0 var(--size-1) var(--size-7) var(--size-1);
-      img {
-        border-top: 1px solid var(--black-1);
-        border-bottom: 1px solid var(--black-1);
+      margin: var(--size-4) var(--size-1);
+
+      background-size: cover;
+      width: 100%;
+      height: 100%;
+      @include media.min-width(medium) {
+        margin: 0 var(--size-1) var(--size-7) var(--size-1);
+      }
+      &--image {
+        height: 300px;
+        width: 100%;
+        background: url("../../assets/Images/energylandia.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
         border-radius: 18px 18px 0 0;
+        border-bottom: 1px solid var(--black-1);
+        @include media.min-width(medium) {
+          height: 350px;
+          background: url("../../assets/Images/energylandia-big.jpg");
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+        @include media.min-width(large) {
+          height: 450px;
+        }
+      }
+      img {
+        height: 350px;
+        border-radius: 18px 18px 0 0;
+        border-bottom: 1px solid var(--black-1);
       }
       h2 {
         letter-spacing: 0.05em;
         text-align: center;
-        padding: var(--size-7) var(--size-3);
+        padding: var(--size-3) 0;
+        @include media.min-width(large) {
+          padding: var(--size-8) 0;
+        }
+      }
+      .divider {
+        margin: var(--size-4) 0;
       }
     }
   }
@@ -70,10 +136,15 @@
   position: relative;
   svg {
     position: absolute;
-    bottom: 50%;
+    top: 20%;
+    right: 10%;
     width: 50px;
     height: 50px;
-    right: 10%;
     z-index: -1;
+    @include media.min-width(large) {
+      bottom: 60%;
+      right: 10%;
+      transform: scale(2);
+    }
   }
 }

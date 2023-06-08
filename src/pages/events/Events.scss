@@ -1,3 +1,5 @@
+@use "@sass/typography/media";
+
 .events {
   background: url("../../assets/Images/eventsBg.jpg");
   height: 100%;
@@ -9,26 +11,40 @@
 
   &__item {
     padding: var(--size-3);
-    margin: var(--size-3) var(--size-1);
+    margin: var(--size-3) var(--size-4);
     border-radius: 18px;
+    @include media.min-width(medium) {
+      margin: var(--size-4);
+    }
     &--inner {
       background: var(--white-1);
       border-radius: 18px;
-      h3 {
-        padding: var(--size-3);
+
+      h2 {
+        padding: var(--size-1);
       }
-      img {
-        object-fit: cover;
+
+      h3 {
+        span {
+          letter-spacing: 5px;
+          font-weight: 700;
+          font-size: var(--size-5);
+          @include media.min-width(medium) {
+            padding: var(--size-7);
+          }
+        }
       }
     }
     &--header {
       display: flex;
+      justify-content: space-evenly;
       h3 {
         letter-spacing: 0.05em;
       }
       img {
         width: 100px;
         padding: var(--size-3);
+        object-fit: cover;
       }
     }
     &--body {

@@ -2,10 +2,12 @@
 
 .event {
   margin: var(--size-5) 0;
+
   @include media.min-width(medium) {
     margin: var(--size-7) 0;
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 10px;
   }
   &__back {
     margin-left: var(--size-2);
@@ -24,6 +26,11 @@
     padding: var(--size-1);
     margin: var(--size-2);
     border-radius: 18px;
+    width: 100%;
+    @include media.min-width(medium) {
+      margin: var(--size-2) 0;
+    }
+
     h1 {
       margin-top: var(--size-2);
       padding: var(--size-2);
@@ -36,7 +43,8 @@
       img {
         border-radius: 18px;
         padding: var(--size-2);
-        min-width: 300px;
+        height: 300px;
+        width: 100%;
       }
     }
     &--title {
@@ -246,18 +254,39 @@
       background: var(--white-1);
       border-radius: 18px;
       margin: var(--size-7) var(--size-1);
+      padding: 0 0 var(--size-4) 0;
 
+      &--image {
+        height: 200px;
+        width: 100%;
+        background: url("../../assets/Images/bon.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 18px 18px 0 0;
+        @include media.min-width(medium) {
+          height: 350px;
+          background: url("../../assets/Images/bon-big.jpg");
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+      }
       img {
         border-radius: 18px 18px 0 0;
       }
       h3 {
         padding: var(--size-5) var(--size-5) 0 var(--size-5);
         text-align: center;
+        @include media.min-width(medium) {
+          padding: var(--size-5) 0;
+        }
       }
     }
   }
   &__form {
-    margin: 0 var(--size-2);
+    display: flex;
+    justify-content: flex-end;
     @include media.min-width(medium) {
       margin-top: var(--size-2);
     }
@@ -265,6 +294,7 @@
       background: var(--green-1);
       padding: var(--size-2);
       border-radius: 18px;
+
       @include media.min-width(medium) {
         position: fixed;
       }
@@ -349,7 +379,10 @@
     &--info {
       padding: var(--size-2);
       display: flex;
-      max-width: 345px;
+      max-width: 100%;
+      @include media.min-width(medium) {
+        max-width: 345px;
+      }
       svg {
         width: 25px;
         height: 25px;

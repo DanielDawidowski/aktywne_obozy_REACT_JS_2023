@@ -72,8 +72,8 @@ function Events() {
               {toggle !== event.name && (
                 <motion.div onClick={() => handleToggle(event.name)} className="events__item--header">
                   <img src={EventUtils.showEventIcon(event.eventType)} alt={event.name} />
-                  <div>
-                    <h3>{event.name}</h3>
+                  <div className="center">
+                    <h2>{event.name}</h2>
                     <h3>
                       {event.status === "active" ? (
                         <span className="active__event">Aktualne</span>

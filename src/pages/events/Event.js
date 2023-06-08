@@ -20,7 +20,6 @@ import AttractionImg from "@assets/Images/attraction-image.jpg";
 import EventLeft from "@assets/Images/event-left.jpg";
 import EventRight from "@assets/Images/event-right.jpg";
 import EventBottom from "@assets/Images/event-bottom.jpg";
-import BonImg from "@assets/Images/bon.jpg";
 import Divider from "@components/divider/Divider";
 import HotelSVG from "@assets/SVG/hotel";
 import PeopleSVG from "@assets/SVG/people";
@@ -111,7 +110,7 @@ function Event() {
         <div className="event__body">
           <div className="event__body--header">
             <h1>{event.name}</h1>
-            <Image src={event.image} alt="energylandia" />
+            <Image src={event.image} alt="event" />
             <div className="event__body--title">
               <Information location>
                 <div className="event__body--address">{EventUtils.showAddress(address)}</div>
@@ -204,7 +203,7 @@ function Event() {
               </div>
             </div>
             <div className="event__body--bon">
-              <Image src={BonImg} alt="bon" />
+              <div className="event__body--bon--image"></div>
               <h3>Realizujemy bony turystyczne</h3>
               <Divider />
             </div>
@@ -287,7 +286,7 @@ function Event() {
                       value={price}
                       labelText={
                         <h5 style={{ color: checked === "price" ? "#f3722c" : "#333333" }}>
-                          {`${event.price} PLN ${checked === "price" ? " cena bez dofinansowaniem KRUS" : ""}`}{" "}
+                          {`${event.price} PLN ---  cena bez dofinansowaniem KRUS`}{" "}
                         </h5>
                       }
                       placeholder="---"
@@ -303,9 +302,9 @@ function Event() {
                       type="checkbox"
                       value={price}
                       labelText={
-                        <h5 style={{ color: checked === "discountPrice" ? "#f3722c" : "#333333" }}>{`${
-                          event.discountPrice
-                        } PLN ${checked === "discountPrice" ? "cena z dofinansowaniem KRUS" : ""}`}</h5>
+                        <h5
+                          style={{ color: checked === "discountPrice" ? "#f3722c" : "#333333" }}
+                        >{`${event.discountPrice} PLN cena z dofinansowaniem KRUS`}</h5>
                       }
                       placeholder="---"
                       style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}

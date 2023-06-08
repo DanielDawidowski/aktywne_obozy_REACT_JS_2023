@@ -15,7 +15,7 @@
     justify-content: center;
     overflow: hidden;
     @include media.min-width(medium) {
-      height: 18vh;
+      height: 20vh;
       font-size: var(--size-6);
     }
   }
@@ -25,7 +25,7 @@
     font-size: var(--size-7);
     text-transform: uppercase;
     font-weight: bold;
-    margin: 0;
+    margin: var(--size-1) 0;
     white-space: nowrap;
     color: var(--yellow-1);
     text-shadow: 1px 1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
