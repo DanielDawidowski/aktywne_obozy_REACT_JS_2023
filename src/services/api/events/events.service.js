@@ -25,6 +25,11 @@ class EventService {
     const response = await axios.put(`/event/${eventId}`, body);
     return response;
   }
+
+  async deleteEvent(eventId) {
+    const response = await axios.delete(`/event/${eventId}`);
+    return response;
+  }
 }
 
 export const eventService = new EventService();

@@ -2,6 +2,24 @@ import BagSVG from "@assets/SVG/bag.svg";
 import KayakSVG from "@assets/SVG/kayak.svg";
 import MountainSVG from "@assets/SVG/mountains.svg";
 import CrabSVG from "@assets/SVG/crab.svg";
+import Events1 from "@assets/Images/morskie_2023.jpg";
+import Events2 from "@assets/Images/krakow_2023.jpg";
+import Events3 from "@assets/Images/gory_2023.jpg";
+
+export const eventSlides = [
+  {
+    id: 0,
+    image: Events1
+  },
+  {
+    id: 1,
+    image: Events2
+  },
+  {
+    id: 2,
+    image: Events3
+  }
+];
 
 export const Icons = [
   {
@@ -64,8 +82,8 @@ export class EventUtils {
     return (
       <div>
         <h3>{matches[0]}</h3>
-        <h3>{matches[1]}</h3>
-        <h3>{matches[2]}</h3>
+        <h4>{matches[1]}</h4>
+        <h4>{matches[2]}</h4>
       </div>
     );
   }

@@ -6,6 +6,8 @@ import Input from "@components/input/Input";
 import Button from "@components/button/Button";
 import { eventService } from "@service/api/events/events.service";
 import { EventUtils } from "@service/utils/event-utils.service";
+import { useDispatch } from "react-redux";
+import { Utils } from "@service/utils/utils.service";
 
 const initialState = {
   name: "",
@@ -20,7 +22,8 @@ const initialState = {
     street: "",
     web: ""
   },
-  attractions: []
+  attractions: [],
+  extraAttractions: []
 };
 
 function EditEvent() {
@@ -30,8 +33,11 @@ function EditEvent() {
   const [hasError, setHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [attraction, setAttraction] = useState([]);
-  const [inputValue, setInputValue] = useState("");
+  const [attractionValue, setAttractionValue] = useState("");
+  const [extraAttraction, setExtraAttraction] = useState([]);
+  const [extraAttractionValue, setExtraAttractionValue] = useState("");
   const fileInputRef = useRef();
+  const dispatch = useDispatch();
 
   const { eventId } = useParams();
 
@@ -50,17 +56,21 @@ function EditEvent() {
   const updateClient = async (e) => {
     e.preventDefault();
     values.attractions = attraction;
+    values.extraAttractions = extraAttraction;
     try {
       const response = await eventService.updateEvent(eventId, values);
       setLoading(false);
       setHasError(false);
       setValues(initialState);
       setAttraction([]);
+      setExtraAttraction([]);
+      Utils.dispatchNotification(response.data.message, "success", dispatch);
       return response;
     } catch (error) {
       setLoading(false);
       setHasError(true);
       setErrorMessage(error?.response?.data.message);
+      Utils.dispatchNotification(error?.response?.data.message, "error", dispatch);
     }
   };
 
@@ -88,9 +98,9 @@ function EditEvent() {
   };
 
   const handleAttraction = (e) => {
-    if (inputValue.trim() !== "") {
-      setAttraction([...attraction, inputValue]);
-      setInputValue("");
+    if (attractionValue.trim() !== "") {
+      setAttraction([...attraction, attractionValue]);
+      setAttractionValue("");
     }
   };
 
@@ -98,6 +108,19 @@ function EditEvent() {
     const updatedAttractions = [...attraction];
     updatedAttractions.splice(index, 1);
     setAttraction(updatedAttractions);
+  };
+
+  const handleExtraAttraction = (e) => {
+    if (extraAttractionValue.trim() !== "") {
+      setExtraAttraction([...extraAttraction, extraAttractionValue]);
+      setExtraAttractionValue("");
+    }
+  };
+
+  const deleteExtraAttraction = (index) => {
+    const updatedExtraAttractions = [...extraAttraction];
+    updatedExtraAttractions.splice(index, 1);
+    setExtraAttraction(updatedExtraAttractions);
   };
 
   return (
@@ -207,25 +230,54 @@ function EditEvent() {
             onClick={handleAttraction}
           >
             <Input
-              id="inputValue"
-              name="inputValue"
+              id="attraction"
+              name="attraction"
               type="text"
-              value={inputValue}
+              value={attractionValue}
               labelText="Atrakcje"
               placeholder="---"
               style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
-              handleChange={(e) => setInputValue(e.target.value)}
+              handleChange={(e) => setAttractionValue(e.target.value)}
             />
 
             <BsFillBookmarkPlusFill style={{ fill: "green", marginLeft: "30px" }} onClick={handleAttraction} />
           </div>
           {attraction.length > 0 && (
             <div className="create__event--attractions">
+              <h6>Max 8 atrakcjii</h6>
               <ul style={{ width: "100%" }}>
                 {attraction.map((attr, i) => (
                   <li key={i} style={{ display: "flex", width: "100%" }}>
                     <h4>{attr}</h4>
                     <AiFillDelete style={{ fill: "red" }} onClick={() => deleteAttraction(i)} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
+            <Input
+              id="extraAttraction"
+              name="extraAttraction"
+              type="text"
+              value={extraAttractionValue}
+              labelText="Dodatekowe atrakcje"
+              placeholder="---"
+              style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
+              handleChange={(e) => setExtraAttractionValue(e.target.value)}
+            />
+
+            <BsFillBookmarkPlusFill style={{ fill: "green", marginLeft: "30px" }} onClick={handleExtraAttraction} />
+          </div>
+          {extraAttraction.length > 0 && (
+            <div className="create__event--attractions">
+              <h6>Max 8 atrakcjii</h6>
+              <ul style={{ width: "100%" }}>
+                {extraAttraction.map((attr, i) => (
+                  <li key={i} style={{ display: "flex", width: "100%" }}>
+                    <h4>{attr}</h4>
+                    <AiFillDelete style={{ fill: "red" }} onClick={() => deleteExtraAttraction(i)} />
                   </li>
                 ))}
               </ul>

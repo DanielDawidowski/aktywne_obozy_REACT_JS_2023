@@ -2,7 +2,7 @@ import { useRoutes } from "react-router-dom";
 import { AuthTabs, ForgotPassword, ResetPassword } from "@pages/auth";
 import Home from "@pages/home/Home";
 import Events from "@pages/events/Events";
-import Event from "@pages/events/Event";
+import Event from "@pages/event/Event";
 import AdminDashboard from "@pages/admin/AdminDashboard";
 import AdminRoute from "@pages/AdminRoute";
 import CreateEvent from "@pages/admin/events/CreateEvent";

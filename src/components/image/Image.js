@@ -15,7 +15,7 @@ const Image = ({ src, alt }) => {
   return (
     <motion.div className={`${pulsing ? "pulse" : ""} loadable`}>
       <motion.img
-        initial={{ height: 10, opacity: 0 }}
+        initial={{ height: "50%", opacity: 0 }}
         // style={{ height: imageLoading ? "6rem" : "auto" }}
         animate={{
           height: imageLoading ? "100%" : "auto",

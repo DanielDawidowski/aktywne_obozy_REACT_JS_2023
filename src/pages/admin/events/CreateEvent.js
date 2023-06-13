@@ -5,6 +5,8 @@ import Button from "@components/button/Button";
 import Input from "@components/input/Input";
 import { eventService } from "@service/api/events/events.service";
 import { EventUtils } from "@service/utils/event-utils.service";
+import { useDispatch } from "react-redux";
+import { Utils } from "@service/utils/utils.service";
 
 const initialState = {
   name: "",
@@ -19,7 +21,8 @@ const initialState = {
     street: "",
     web: ""
   },
-  attractions: []
+  attractions: [],
+  extraAttractions: []
 };
 
 function CreateEvent() {
@@ -28,8 +31,11 @@ function CreateEvent() {
   const [hasError, setHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [attraction, setAttraction] = useState([]);
-  const [inputValue, setInputValue] = useState("");
+  const [attractionValue, setAttractionValue] = useState("");
+  const [extraAttraction, setExtraAttraction] = useState([]);
+  const [extraAttractionValue, setExtraAttractionValue] = useState("");
   const fileInputRef = useRef();
+  const dispatch = useDispatch();
 
   const { name, eventType, price, discountPrice, startDate, endDate, image, address } = values;
   const { hotel, street, web } = address;
@@ -37,6 +43,7 @@ function CreateEvent() {
   const createEvent = async (e) => {
     e.preventDefault();
     values.attractions = attraction;
+    values.extraAttractions = extraAttraction;
     try {
       const response =
         image === "" ? await eventService.createEvent(values) : await eventService.createEventWithImage(values);
@@ -44,13 +51,14 @@ function CreateEvent() {
       setHasError(false);
       setValues(initialState);
       setAttraction([]);
-      console.log("response", response);
-
+      setExtraAttraction([]);
+      Utils.dispatchNotification(response.data.message, "success", dispatch);
       return response;
     } catch (error) {
       setLoading(false);
       setHasError(true);
       setErrorMessage(error?.response?.data.message);
+      Utils.dispatchNotification(error?.response?.data.message, "error", dispatch);
     }
   };
 
@@ -58,9 +66,6 @@ function CreateEvent() {
     setValues({ ...values, [e.target.name]: e.target.value });
     if (e.target.name === "hotel" || e.target.name === "street" || e.target.name === "web") {
       setValues({ ...values, address: { ...values.address, [e.target.name]: e.target.value } });
-    }
-    if (e.target.name === "attraction") {
-      setAttraction([e.target.value]);
     }
     // console.log(e.target.name, " ---- ", e.target.value);
   };
@@ -72,9 +77,9 @@ function CreateEvent() {
   };
 
   const handleAttraction = (e) => {
-    if (inputValue.trim() !== "") {
-      setAttraction([...attraction, inputValue]);
-      setInputValue("");
+    if (attractionValue.trim() !== "") {
+      setAttraction([...attraction, attractionValue]);
+      setAttractionValue("");
     }
   };
 
@@ -82,6 +87,19 @@ function CreateEvent() {
     const updatedAttractions = [...attraction];
     updatedAttractions.splice(index, 1);
     setAttraction(updatedAttractions);
+  };
+
+  const handleExtraAttraction = (e) => {
+    if (extraAttractionValue.trim() !== "") {
+      setExtraAttraction([...extraAttraction, extraAttractionValue]);
+      setExtraAttractionValue("");
+    }
+  };
+
+  const deleteExtraAttraction = (index) => {
+    const updatedExtraAttractions = [...extraAttraction];
+    updatedExtraAttractions.splice(index, 1);
+    setExtraAttraction(updatedExtraAttractions);
   };
 
   return (
@@ -150,7 +168,7 @@ function CreateEvent() {
           style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
           handleChange={handleChange}
         />
-        <h3>Dane Hotelu</h3>
+        <h5>Dane Hotelu</h5>
         <Input
           id="hotel"
           name="hotel"
@@ -183,14 +201,14 @@ function CreateEvent() {
         />
         <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
           <Input
-            id="inputValue"
-            name="inputValue"
+            id="attraction"
+            name="attraction"
             type="text"
-            value={inputValue}
+            value={attractionValue}
             labelText="Atrakcje"
             placeholder="---"
             style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
-            handleChange={(e) => setInputValue(e.target.value)}
+            handleChange={(e) => setAttractionValue(e.target.value)}
           />
 
           <BsFillBookmarkPlusFill style={{ fill: "green", marginLeft: "30px" }} onClick={handleAttraction} />
@@ -209,7 +227,35 @@ function CreateEvent() {
           </div>
         )}
 
-        <div style={{ marginTop: "20px" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
+          <Input
+            id="extraAttraction"
+            name="extraAttraction"
+            type="text"
+            value={extraAttractionValue}
+            labelText="Dodatekowe atrakcje"
+            placeholder="---"
+            style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
+            handleChange={(e) => setExtraAttractionValue(e.target.value)}
+          />
+
+          <BsFillBookmarkPlusFill style={{ fill: "green", marginLeft: "30px" }} onClick={handleExtraAttraction} />
+        </div>
+        {extraAttraction.length > 0 && (
+          <div className="create__event--attractions">
+            <h6>Max 8 atrakcjii</h6>
+            <ul style={{ width: "100%" }}>
+              {extraAttraction.map((attr, i) => (
+                <li key={i} style={{ display: "flex", width: "100%" }}>
+                  <h4>{attr}</h4>
+                  <AiFillDelete style={{ fill: "red" }} onClick={() => deleteExtraAttraction(i)} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <div style={{ margin: "20px 0" }}>
           <label>Kategoria</label>
           <select name="eventType" className="form-control" onChange={handleChange} defaultValue={eventType} required>
             <option defaultChecked value="">
@@ -221,7 +267,7 @@ function CreateEvent() {
             <option value="Półkolonie">Półkolonie</option>
           </select>
         </div>
-        <div style={{ marginBottom: "20px" }}>
+        <div style={{ margin: "20px 0" }}>
           <Button
             label={`${loading ? "Wysyłanie..." : "Utwórz"}`}
             className="auth-button button"

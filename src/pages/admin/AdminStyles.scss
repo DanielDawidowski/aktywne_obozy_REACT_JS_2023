@@ -1,5 +1,63 @@
+@use "@sass/typography/media";
+
 .admin {
   display: grid;
   grid-template-columns: 1fr 3fr;
   margin-top: var(--size-7);
+  padding: var(--size-1);
+
+  @include media.min-width(medium) {
+    padding: var(--size-2) 0;
+  }
+
+  .admin__nav {
+    li {
+      margin: var(--size-7) var(--size-4);
+      a {
+        font-size: var(--size-4);
+        font-weight: 700;
+        color: var(--yellow-1);
+        text-decoration: none;
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+        &:hover {
+          color: var(--red-1);
+        }
+        @include media.min-width(medium) {
+          font-size: var(--size-6);
+        }
+      }
+    }
+  }
+
+  &__main {
+    margin-top: var(--size-7);
+    &--clients {
+      &--item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: var(--size-3) 0;
+        padding-bottom: var(--size-3);
+        border-bottom: 1px solid var(--black-2);
+
+        div > * {
+          margin: 0 var(--size-3);
+        }
+      }
+    }
+    &--events {
+      &--item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: var(--size-3) 0;
+        padding-bottom: var(--size-3);
+        border-bottom: 1px solid var(--black-2);
+
+        div > * {
+          margin: 0 var(--size-3);
+        }
+      }
+    }
+  }
 }

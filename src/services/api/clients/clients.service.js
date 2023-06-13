@@ -20,6 +20,11 @@ class ClientService {
     const response = await axios.put(`/client/${clientId}`, body);
     return response;
   }
+
+  async deleteClient(clientId) {
+    const response = await axios.delete(`/client/${clientId}`);
+    return response;
+  }
 }
 
 export const clientService = new ClientService();

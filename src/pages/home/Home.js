@@ -11,6 +11,7 @@ import Divider from "@components/divider/Divider";
 import Image from "@components/image/Image";
 
 import "@pages/home/Home.scss";
+import RandomIcons from "@components/randomIcons/RandomIcons";
 
 const Home = () => {
   return (
@@ -21,7 +22,7 @@ const Home = () => {
           animate={{ opacity: 1, x: 0, transition: { duration: 1.5 } }}
           exit={{ opacity: 0, x: 100, transition: { duration: 1.5 } }}
           transition={{ duration: 1.5 }}
-          className="home__carousel"
+          className="home__carousel container"
         >
           <div className="home__carousel--small">
             <Carousel slides={homeSlides} />
@@ -30,18 +31,16 @@ const Home = () => {
             <Carousel slides={homeSlidesBig} />
           </div>
         </motion.div>
-        <motion.div>
-          <motion.div className="home__icons">
-            <Link to="/events">
-              <h2>Zobacz</h2>
-            </Link>
-          </motion.div>
+        <motion.div className="home__icons">
+          <Link to="/events">
+            <h2>Zobacz</h2>
+          </Link>
         </motion.div>
         <Divider />
         <motion.div className="home__scroll">
           <ScrollText />
         </motion.div>
-        <motion.div className="home__events container">
+        <motion.div className="home__events">
           <div className="home__events--item">
             <div className="home__events--item--image"></div>
             <div className="title__dots">
@@ -61,6 +60,20 @@ const Home = () => {
               </h2>
             </div>
             <Divider />
+          </div>
+        </motion.div>
+        <motion.div className="home__bottom container">
+          <div className="home__bottom--xsmall">
+            <RandomIcons flex num={2} />
+          </div>
+          <div className="home__bottom--small">
+            <RandomIcons flex num={4} />
+          </div>
+          <div className="home__bottom--medium">
+            <RandomIcons flex num={6} />
+          </div>
+          <div className="home__bottom--large">
+            <RandomIcons flex num={8} />
           </div>
         </motion.div>
       </motion.div>

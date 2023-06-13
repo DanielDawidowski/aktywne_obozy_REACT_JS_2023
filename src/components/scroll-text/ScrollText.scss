@@ -14,6 +14,7 @@
     align-items: flex-start;
     justify-content: center;
     overflow: hidden;
+
     @include media.min-width(medium) {
       height: 20vh;
       font-size: var(--size-6);
