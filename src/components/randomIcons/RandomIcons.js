@@ -69,7 +69,6 @@ const RandomIcons = (props) => {
 
   const gridIcons = (num) => {
     const numGrid = num / 2;
-    console.log("numGrid", numGrid);
     return grid ? numGrid : num;
   };
 

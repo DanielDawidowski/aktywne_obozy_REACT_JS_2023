@@ -10,6 +10,7 @@ import AdminClients from "@pages/admin/clients/AdminClients";
 import EditClient from "@pages/admin/clients/EditClient";
 import AdminEvents from "@pages/admin/events/AdminEvents";
 import EditEvent from "@pages/admin/events/EditEvent";
+import Contact from "@pages/contact/Contact";
 
 export const AppRouter = () => {
   const elements = useRoutes([
@@ -28,6 +29,10 @@ export const AppRouter = () => {
     {
       path: "/event/:eventId",
       element: <Event />
+    },
+    {
+      path: "/contact",
+      element: <Contact />
     },
     {
       path: "/app/login",

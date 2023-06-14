@@ -1,0 +1,122 @@
+@use "@sass/typography/media";
+
+.contact {
+  display: grid;
+  // direction: rtl;
+  @include media.min-width(large) {
+    display: flex;
+  }
+  &__form {
+    padding: var(--size-8) var(--size-1);
+    margin: var(--size-1);
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    border: 1px solid var(--orange-1);
+    border-radius: 18px;
+    height: 500px;
+
+    @include media.min-width(large) {
+      padding: var(--size-4) var(--size-1);
+      margin: var(--size-1);
+      width: 100%;
+    }
+    &--wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      form {
+        label[for="message"] {
+          padding: var(--size-2);
+        }
+        textarea {
+          width: 100%;
+          height: 100%;
+          background: var(--red-2);
+          outline: 0;
+          padding: var(--size-3);
+          margin: var(--size-1);
+          font-size: var(--size-4);
+          border: 1px solid var(--white-1);
+          border-radius: 18px;
+        }
+      }
+      button {
+        background: var(--orange-1);
+        border: 1px solid var(--white-1);
+        outline: 0;
+        padding: var(--size-3);
+        margin: var(--size-3) var(--size-1);
+        font-size: var(--size-4);
+        color: var(--white-1);
+        border-radius: 18px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+      }
+    }
+    &--image {
+      display: none;
+      @include media.min-width(large) {
+        display: block;
+        position: absolute;
+        right: 0;
+        bottom: 20px;
+      }
+    }
+  }
+  &__questions {
+    padding: var(--size-1);
+    width: 100%;
+    height: 100%;
+    @include media.min-width(large) {
+      padding: var(--size-2);
+      margin: var(--size-2);
+    }
+    &--header {
+      margin-top: var(--size-6);
+      position: relative;
+
+      @include media.min-width(large) {
+        display: grid;
+        place-items: center;
+      }
+      h1 {
+        position: absolute;
+        top: -80%;
+        right: 10%;
+        color: var(--orange-1);
+        font-size: 120px;
+        z-index: -1;
+        @include media.min-width(large) {
+          top: -85%;
+          right: 4%;
+          font-size: 300px;
+        }
+      }
+      h2 {
+        text-align: center;
+      }
+    }
+    &--body {
+      margin: var(--size-6) var(--size-1);
+      &--item {
+        padding: var(--size-4) 0;
+
+        h3 {
+          border-bottom: 1px solid var(--orange-1);
+          padding: var(--size-2) 0;
+        }
+        p {
+          font-size: var(--size-5);
+          padding: var(--size-4) 0;
+        }
+        h3,
+        p {
+          letter-spacing: 0.09em;
+          text-align: justify;
+        }
+      }
+    }
+  }
+}
