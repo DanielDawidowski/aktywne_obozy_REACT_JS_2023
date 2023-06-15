@@ -13,10 +13,11 @@ const initialState = {
   email: "",
   tel: "",
   birthDate: "",
-  price: ""
+  price: "",
+  eventName: ""
 };
 
-const EditClient = (index) => {
+const EditClient = () => {
   const [values, setValues] = useState(initialState);
   // const [openAccordion, setOpenAccordion] = useState(null);
   const [client, setClient] = useState({});
@@ -27,6 +28,8 @@ const EditClient = (index) => {
   const [checked, setChecked] = useState("");
   const [showEventPrice, setShowEventPrice] = useState("");
   const [currentPage] = useState(1);
+
+  const { clientId } = useParams();
 
   const getAllEvents = useCallback(async () => {
     try {
@@ -40,8 +43,6 @@ const EditClient = (index) => {
   useEffect(() => {
     getAllEvents();
   }, [getAllEvents]);
-
-  const { clientId } = useParams();
 
   const { name, email, tel, birthDate, price } = values;
 
@@ -68,11 +69,14 @@ const EditClient = (index) => {
 
   const updateClient = async (e) => {
     e.preventDefault();
+
     try {
       const response = await clientService.updateClient(clientId, values);
       setLoading(false);
       setHasError(false);
+      console.log("values", values);
       setValues(initialState);
+      setChecked("");
       return response;
     } catch (error) {
       setLoading(false);
@@ -84,7 +88,7 @@ const EditClient = (index) => {
   const handleChange = (e) => {
     if (e.target.type === "select-one") {
       setChecked("");
-      setValues({ ...values, eventId: e.target.value });
+      setValues({ ...values, eventId: e.target.value, eventName: e.target.selectedOptions[0].innerHTML });
       showEventPriceHandler(e);
     } else if (e.target.type === "checkbox") {
       setChecked(e.target.name);
