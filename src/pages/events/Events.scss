@@ -1,0 +1,136 @@
+@use "@sass/typography/media";
+
+.events {
+  background: url("../../assets/Images/eventsBg.jpg");
+  height: 100%;
+  background-position: top;
+  background-attachment: fixed;
+  margin-top: 30px;
+  margin-bottom: 50px;
+
+  @include media.min-width(medium) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-flow: dense;
+    margin: 0 auto;
+    max-width: 1200px;
+    height: 80vh;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    &--wrapper {
+      width: 100%;
+    }
+    &--item {
+      padding: var(--size-3);
+      margin: var(--size-3) var(--size-4);
+      border-radius: 18px;
+      @include media.min-width(medium) {
+        margin: var(--size-4) 0;
+      }
+      &--inner {
+        background: var(--white-1);
+        border-radius: 18px;
+        h2 {
+          padding: var(--size-1);
+        }
+
+        h3 {
+          span {
+            letter-spacing: 5px;
+            font-weight: 700;
+            font-size: var(--size-5);
+            @include media.min-width(medium) {
+              padding: var(--size-7);
+            }
+          }
+        }
+      }
+      &--header {
+        display: flex;
+        justify-content: space-evenly;
+        h3 {
+          letter-spacing: 0.05em;
+        }
+        img {
+          width: 100px;
+          padding: var(--size-3);
+          object-fit: cover;
+        }
+      }
+      &--body {
+        img {
+          object-fit: cover;
+          border-radius: 18px 18px 0 0;
+        }
+        h2 {
+          text-align: center;
+          margin: var(--size-3) 0;
+        }
+      }
+      &--calendars {
+        display: grid;
+        padding: var(--size-1) var(--size-5);
+      }
+      &--calendar {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: var(--size-2) var(--size-3);
+        svg {
+          width: 55px;
+          height: 55px;
+          margin-right: var(--size-5);
+        }
+        div {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-start;
+          h3 {
+            padding: var(--size-1) var(--size-3);
+          }
+        }
+      }
+      &--footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: var(--size-5) 0;
+        img {
+          width: 100px;
+          height: 100px;
+        }
+        a {
+          color: var(--white-1);
+          font-size: var(--size-5);
+          letter-spacing: 0.05em;
+          margin-left: var(--size-5);
+        }
+      }
+    }
+  }
+  &__carousel {
+    overflow: hidden;
+    padding: var(--size-1);
+    @include media.min-width(medium) {
+      margin-top: var(--size-3);
+    }
+
+    &--inner {
+      @include media.min-width(medium) {
+        position: fixed;
+      }
+    }
+  }
+}
+
+.active__event {
+  color: var(--green-1);
+}
+
+.not--active__event {
+  color: var(--red-1);
+}

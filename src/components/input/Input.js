@@ -32,7 +32,7 @@ Input.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   id: PropTypes.string,
-  labelText: PropTypes.string,
+  labelText: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   value: PropTypes.any,
   className: PropTypes.string,
   placeholder: PropTypes.string,

@@ -16,7 +16,7 @@ function AuthTabs() {
         exit={{ opacity: 0, y: -10 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="auth container center">
+        <div className="auth container">
           <div className="tabs">
             <ul className="tab-group">
               <motion.li

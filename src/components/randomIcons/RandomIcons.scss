@@ -1,0 +1,59 @@
+@use "@sass/typography/media";
+
+.random__icons {
+  width: 100%;
+  padding: var(--size-5) var(--size-2);
+  @include media.min-width(medium) {
+    padding: var(--size-5) var(--size-1);
+  }
+  &.flex {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    @include media.min-width(medium) {
+      justify-content: space-between;
+    }
+  }
+  &.grid {
+    display: grid;
+  }
+
+  &.wrap {
+    flex-wrap: wrap;
+    row-gap: var(--size-5);
+  }
+  &.small {
+    svg {
+      width: 65px;
+      height: 65px;
+
+      @include media.min-width(medium) {
+        width: 75px;
+        height: 75px;
+      }
+      @include media.min-width(large) {
+        width: 95px;
+        height: 95px;
+      }
+    }
+  }
+  &.big {
+    svg {
+      width: 95px;
+      height: 95px;
+
+      @include media.min-width(medium) {
+        width: 105px;
+        height: 105px;
+      }
+      @include media.min-width(large) {
+        width: 125px;
+        height: 125px;
+      }
+    }
+  }
+  &--item {
+    display: grid;
+    place-items: center;
+  }
+}

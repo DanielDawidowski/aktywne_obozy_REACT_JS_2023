@@ -1,0 +1,37 @@
+@use "@sass/typography/media";
+
+.scroll__text {
+  overflow-x: hidden;
+  height: 20vh;
+  width: 100%;
+  &--section {
+    position: sticky;
+    top: 0;
+    height: 15vh;
+    width: 110%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    overflow: hidden;
+
+    @include media.min-width(medium) {
+      height: 20vh;
+      font-size: var(--size-6);
+    }
+  }
+  &--title {
+    letter-spacing: var(--size-1);
+    word-spacing: 0.08em;
+    font-size: var(--size-7);
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: var(--size-1) 0;
+    white-space: nowrap;
+    color: var(--yellow-1);
+    text-shadow: 1px 1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    @include media.min-width(medium) {
+      font-size: calc(100vw / 8);
+    }
+  }
+}

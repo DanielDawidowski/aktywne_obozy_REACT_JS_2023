@@ -1,10 +1,16 @@
 import { useRoutes } from "react-router-dom";
+import { AuthTabs, ForgotPassword, ResetPassword } from "@pages/auth";
 import Home from "@pages/home/Home";
-import { AuthTabs } from "@pages/auth";
-import ForgotPassword from "@pages/auth/forgot-password/ForgotPassword";
-import ResetPassword from "@pages/auth/reset-password/ResetPassword";
 import Events from "@pages/events/Events";
-import Event from "@pages/events/Event";
+import Event from "@pages/event/Event";
+import AdminDashboard from "@pages/admin/AdminDashboard";
+import AdminRoute from "@pages/AdminRoute";
+import CreateEvent from "@pages/admin/events/CreateEvent";
+import AdminClients from "@pages/admin/clients/AdminClients";
+import EditClient from "@pages/admin/clients/EditClient";
+import AdminEvents from "@pages/admin/events/AdminEvents";
+import EditEvent from "@pages/admin/events/EditEvent";
+import Contact from "@pages/contact/Contact";
 
 export const AppRouter = () => {
   const elements = useRoutes([
@@ -25,13 +31,56 @@ export const AppRouter = () => {
       element: <Event />
     },
     {
+      path: "/contact",
+      element: <Contact />
+    },
+    {
+      path: "/app/login",
+      element: <AuthTabs />
+    },
+    {
       path: "/forgot-password",
       element: <ForgotPassword />
     },
     {
       path: "/reset-password",
       element: <ResetPassword />
+    },
+    {
+      path: "/admin",
+      element: (
+        <AdminRoute>
+          <AdminDashboard />
+        </AdminRoute>
+      ),
+      children: [
+        {
+          path: "event/create",
+          element: <CreateEvent />
+        },
+        {
+          path: "clients",
+          element: <AdminClients />
+        },
+        {
+          path: "client/:clientId",
+          element: <EditClient />
+        },
+        {
+          path: "events/list",
+          element: <AdminEvents />
+        },
+        {
+          path: "events/update/:eventId",
+          element: <EditEvent />
+        }
+      ]
     }
+
+    // {
+    //   path: "*",
+    //   element: <Error />
+    // }
   ]);
   return elements;
 };

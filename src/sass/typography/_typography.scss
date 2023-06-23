@@ -1,15 +1,21 @@
-@import url("https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap");
+@use "@sass/typography/media";
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Oswald:wght@300&display=swap");
 
 html {
   line-height: 1.25;
   body {
-    font-family: "Racing Sans One", cursive;
+    font-family: "Oswald", cursive;
   }
 }
 
 a {
   font-weight: 600;
   text-decoration: none;
+}
+
+ul {
+  list-style: none;
 }
 
 h1,
@@ -19,8 +25,61 @@ h4,
 h5,
 h6 {
   color: var(--black-1);
+  font-family: "Lora", cursive;
 }
 
-ul {
-  list-style: none;
+h1 {
+  font-size: var(--size-6);
+  @include media.min-width(medium) {
+    font-size: var(--size-7);
+  }
+  @include media.min-width(xlarge) {
+    font-size: var(--size-8);
+  }
+}
+
+h2 {
+  font-size: var(--size-5);
+  @include media.min-width(medium) {
+    font-size: var(--size-6);
+  }
+  @include media.min-width(xlarge) {
+    font-size: var(--size-7);
+  }
+}
+
+h3 {
+  font-size: var(--size-4);
+  @include media.min-width(medium) {
+    font-size: var(--size-5);
+  }
+  @include media.min-width(xlarge) {
+    font-size: var(--size-6);
+  }
+}
+
+h4 {
+  font-size: var(--size-3);
+  @include media.min-width(medium) {
+    font-size: var(--size-4);
+  }
+  @include media.min-width(xlarge) {
+    font-size: var(--size-5);
+  }
+}
+
+p {
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  @include media.min-width(medium) {
+    font-size: var(--size-5);
+  }
+}
+
+span {
+  font-family: "Oswald", cursive;
+}
+
+img {
+  object-fit: cover;
 }

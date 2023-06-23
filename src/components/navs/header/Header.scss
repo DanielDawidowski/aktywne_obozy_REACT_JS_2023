@@ -1,0 +1,49 @@
+@use "@sass/typography/media";
+
+.header {
+  z-index: 1;
+  width: 100%;
+  border-bottom: 1px solid var(--black-1);
+  &__nav {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--size-2);
+    @include media.min-width(medium) {
+      padding: var(--size-2) 0;
+    }
+    &--logo {
+      img {
+        max-width: 50px;
+      }
+    }
+    &--menu {
+      display: none;
+      @include media.min-width(medium) {
+        display: block;
+      }
+      ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+      }
+      li {
+        margin-right: var(--size-7);
+        a {
+          font-size: var(--size-5);
+          font-weight: 700;
+          color: var(--yellow-1);
+          text-decoration: none;
+          text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+          &:hover {
+            color: var(--red-1);
+          }
+        }
+      }
+      li:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

@@ -1,45 +1,56 @@
-.tabs {
-  margin: 30px auto;
-  max-width: 500px;
-  overflow: hidden;
-  position: relative;
-  padding: 0;
-  background: var(--green-1);
-  border: 1px solid var(--primary-1);
-  .tab-group {
+.auth {
+  background-image: url("../../../assets/Images/nav-image.jpg");
+  background-position: center;
+  background-repeat: repeat;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border-radius: 18px;
+  .tabs {
+    margin: 30px auto;
+    max-width: 500px;
+    overflow: hidden;
+    position: relative;
     padding: 0;
-    margin: 0;
+    background: var(--green-1);
+    border: 1px solid var(--primary-1);
+    .tab-group {
+      padding: 0;
+      margin: 0;
 
-    .active button {
-      background: var(--success);
-      color: var(--gray-2);
+      .active button {
+        background: var(--success);
+        color: var(--gray-2);
+      }
+
+      li button,
+      .forgot-password,
+      .reset-password {
+        display: block;
+        text-decoration: none;
+        padding: 15px;
+        background: var(--white-1);
+        color: var(--gray-1);
+        font-size: 20px;
+        float: left;
+        width: 50%;
+        border: none;
+        text-align: center;
+        border-top: 3px solid transparent;
+        transition: all 0.4s ease-in-out;
+      }
     }
 
-    li button,
-    .forgot-password,
-    .reset-password {
-      display: block;
-      text-decoration: none;
-      padding: 15px;
-      background: var(--white-1);
-      color: var(--gray-1);
-      font-size: 20px;
-      float: left;
-      width: 50%;
-      border: none;
-      text-align: center;
-      border-top: 3px solid transparent;
-      transition: all 0.4s ease-in-out;
+    .tab-item {
+      padding: var(--size-2);
     }
-  }
 
-  .tab-item {
-    padding: 30px 0 0;
-  }
-
-  .tabs-forgot-password {
-    height: 240px;
-    border-bottom-right-radius: 15px;
-    border-bottom-left-radius: 15px;
+    .tabs-forgot-password {
+      height: 240px;
+      border-bottom-right-radius: 15px;
+      border-bottom-left-radius: 15px;
+    }
   }
 }

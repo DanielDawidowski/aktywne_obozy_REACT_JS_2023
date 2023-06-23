@@ -1,0 +1,178 @@
+@use "@sass/typography/media";
+
+.home {
+  height: 100vh;
+
+  &__carousel {
+    overflow: hidden;
+
+    &--small {
+      display: block;
+      height: 25vh;
+
+      @include media.min-width(medium) {
+        display: none;
+      }
+    }
+    &--big {
+      display: none;
+      .carousel {
+        img {
+          background-position: top;
+          background-size: cover;
+        }
+      }
+      @include media.min-width(small) {
+        height: 45vh;
+      }
+      @include media.min-width(medium) {
+        display: block;
+        height: 60vh;
+      }
+    }
+  }
+
+  &__icons {
+    padding-top: var(--size-4);
+    background: url("../../assets/Images/home_icons-big.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 13vh;
+    width: 100%;
+    margin: var(--size-4) 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include media.min-width(small) {
+      height: 18vh;
+    }
+    @include media.min-width(medium) {
+      height: 24vh;
+      margin-top: var(--size-7);
+    }
+
+    a {
+      position: absolute;
+      display: grid;
+      place-items: center;
+      h2 {
+        background: var(--white-1);
+        border-radius: 18px;
+        letter-spacing: 0.1em;
+        padding: var(--size-1) var(--size-5);
+        border: 1px solid var(--black-1);
+        color: var(--orange-1);
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+      }
+    }
+  }
+
+  &__scroll {
+    height: 20vh;
+    margin: var(--size-1) 0;
+    @include media.min-width(medium) {
+      margin: var(--size-8) 0;
+    }
+  }
+
+  &__events {
+    padding: var(--size-1) 0;
+    margin: var(--size-1);
+    @include media.min-width(medium) {
+      padding: 0 var(--size-1);
+      margin: 0 auto;
+      max-width: 1200px;
+    }
+    &--item {
+      border: 1px solid var(--black-1);
+      border-radius: 18px;
+      margin: var(--size-4) 0;
+      @include media.min-width(medium) {
+        margin: 0 var(--size-1) var(--size-7) var(--size-1);
+      }
+      &--image {
+        height: 300px;
+        background: url("../../assets/Images/energylandia.jpg");
+        background-size: cover;
+        background-position: center;
+        border-radius: 18px 18px 0 0;
+        border-bottom: 1px solid var(--black-1);
+        @include media.min-width(medium) {
+          height: 350px;
+          background: url("../../assets/Images/energylandia-big.jpg");
+          background-size: cover;
+          background-position: center;
+        }
+        @include media.min-width(large) {
+          height: 450px;
+        }
+      }
+      img {
+        height: 350px;
+        border-radius: 18px 18px 0 0;
+        border-bottom: 1px solid var(--black-1);
+      }
+      h2 {
+        letter-spacing: 0.05em;
+        text-align: center;
+        padding: var(--size-3) 0;
+        @include media.min-width(large) {
+          padding: var(--size-8) 0;
+        }
+      }
+      .divider {
+        margin: var(--size-4) 0;
+      }
+    }
+  }
+
+  &__bottom {
+    &--xsmall {
+      display: block;
+      @include media.min-width(small) {
+        display: none;
+      }
+    }
+    &--small {
+      display: none;
+      @include media.min-width(small) {
+        display: block;
+      }
+      @include media.min-width(medium) {
+        display: none;
+      }
+    }
+    &--medium {
+      display: none;
+      @include media.min-width(medium) {
+        display: block;
+      }
+      @include media.min-width(large) {
+        display: none;
+      }
+    }
+    &--large {
+      display: none;
+      @include media.min-width(large) {
+        display: block;
+      }
+    }
+  }
+}
+
+.title__dots {
+  position: relative;
+  svg {
+    position: absolute;
+    top: 20%;
+    right: 10%;
+    width: 50px;
+    height: 50px;
+    z-index: -1;
+    @include media.min-width(large) {
+      bottom: 60%;
+      right: 10%;
+      transform: scale(2);
+    }
+  }
+}
