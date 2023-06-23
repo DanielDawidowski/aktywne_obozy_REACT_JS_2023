@@ -7,7 +7,7 @@ import useSessionStorage from "@hooks/useSessionStorage";
 import Input from "@components/input/Input";
 import Button from "@components/button/Button";
 import { authService } from "@service/api/auth/auth.service";
-
+import { Utils } from "@service/utils/utils.service";
 import "@pages/auth/login/Login.scss";
 
 const Login = () => {
@@ -33,7 +33,6 @@ const Login = () => {
         username,
         password
       });
-      console.log(result);
       // return result;
       setUser(result.data.user);
       setLoggedIn(keepLoggedIn);
