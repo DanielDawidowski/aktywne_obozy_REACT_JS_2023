@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { AiFillDelete } from "react-icons/ai";
 import { BsFillBookmarkPlusFill } from "react-icons/bs";
@@ -8,6 +8,7 @@ import { eventService } from "@service/api/events/events.service";
 import { EventUtils } from "@service/utils/event-utils.service";
 import { useDispatch } from "react-redux";
 import { Utils } from "@service/utils/utils.service";
+import useEffectOnce from "@hooks/useEffectOnce";
 
 const initialState = {
   name: "",
@@ -74,9 +75,7 @@ function EditEvent() {
     }
   };
 
-  useEffect(() => {
-    console.log("file", fileInputRef.current.files[0]);
-
+  useEffectOnce(() => {
     getEvent();
   }, [getEvent]);
 
@@ -148,7 +147,7 @@ function EditEvent() {
             type="text"
             value={name}
             labelText="Nazwa wyjazdu"
-            placeholder={showEvent.name}
+            placeholder="---"
             style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
             handleChange={handleChange}
           />
@@ -158,7 +157,7 @@ function EditEvent() {
             type="text"
             value={price}
             labelText="Cena"
-            placeholder={showEvent.price}
+            placeholder="---"
             style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
             handleChange={handleChange}
           />
@@ -168,7 +167,7 @@ function EditEvent() {
             type="text"
             value={discountPrice}
             labelText="Cena KRUS"
-            placeholder={showEvent.discountPrice}
+            placeholder="---"
             style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
             handleChange={handleChange}
           />
@@ -178,7 +177,7 @@ function EditEvent() {
             type="date"
             value={startDate}
             labelText="Data rozpoczęcia"
-            placeholder={showEvent.startDate}
+            placeholder="---"
             style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
             handleChange={handleChange}
           />
@@ -188,7 +187,7 @@ function EditEvent() {
             type="date"
             value={endDate}
             labelText="Data zakonczenia"
-            placeholder={showEvent.endDate}
+            placeholder="---"
             style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
             handleChange={handleChange}
           />

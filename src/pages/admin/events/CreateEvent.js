@@ -21,6 +21,7 @@ const initialState = {
     street: "",
     web: ""
   },
+  energyland: false,
   attractions: [],
   extraAttractions: []
 };
@@ -37,7 +38,7 @@ function CreateEvent() {
   const fileInputRef = useRef();
   const dispatch = useDispatch();
 
-  const { name, eventType, price, discountPrice, startDate, endDate, image, address } = values;
+  const { name, eventType, price, discountPrice, startDate, endDate, image, address, energyland } = values;
   const { hotel, street, web } = address;
 
   const createEvent = async (e) => {
@@ -199,6 +200,19 @@ function CreateEvent() {
           style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
           handleChange={handleChange}
         />
+        <div className="event__form--checkbox">
+          <Input
+            id="energyland"
+            name="energyland"
+            type="checkbox"
+            value={energyland}
+            labelText="Energylandia"
+            placeholder="---"
+            style={{ border: `${hasError ? "1px solid #fa9b8a" : ""}` }}
+            handleChange={handleChange}
+            checked={false}
+          />
+        </div>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
           <Input
             id="attraction"

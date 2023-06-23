@@ -11,6 +11,7 @@ import Snowboard1 from "@assets/SVG/Icons/Snowboard1";
 import Snowboard2 from "@assets/SVG/Icons/Snowboard2";
 import LifeJacket from "@assets/SVG/Icons/LifeJacket";
 import "@components/randomIcons/RandomIcons.scss";
+import useEffectOnce from "@hooks/useEffectOnce";
 
 const icons = [
   {
@@ -71,6 +72,10 @@ const RandomIcons = (props) => {
     const numGrid = num / 2;
     return grid ? numGrid : num;
   };
+
+  useEffectOnce(() => {
+    randomIcons(icons, num);
+  });
 
   return (
     <div

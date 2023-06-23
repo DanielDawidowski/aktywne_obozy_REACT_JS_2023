@@ -3,12 +3,11 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { eventService } from "@service/api/events/events.service";
 import Layout from "@components/layout/Layout";
-
 import Carousel from "@components/carousel/Carousel";
-import "@pages/events/Events.scss";
 import { EventUtils, eventSlides } from "@service/utils/event-utils.service";
 import Calendar from "@assets/SVG/calendar";
 import { TimeAgo } from "@service/utils/timeago.utils";
+import "@pages/events/Events.scss";
 
 function Events() {
   const [events, setEvents] = useState([]);
@@ -19,7 +18,7 @@ function Events() {
     try {
       const response = await eventService.getAllEvents(currentPage);
       setEvents(response.data.events);
-      // console.log("response", response.data.events);
+      console.log("response", response.data.events);
     } catch (error) {
       console.log("error", error);
     }
@@ -27,10 +26,6 @@ function Events() {
 
   useEffect(() => {
     getAllEvents();
-    if (events) {
-      console.log("events", events);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getAllEvents]);
 
   const handleToggle = (name) => {

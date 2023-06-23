@@ -49,6 +49,7 @@ function Event() {
     try {
       const response = await eventService.getEvent(eventId);
       setEvent(response.data.event);
+      console.log("response", response.data.event);
     } catch (error) {
       console.log("error", error);
     }
@@ -95,7 +96,7 @@ function Event() {
           <GoBackButton type={eventType} />
         </div>
 
-        <div className="event__body">
+        <div className="event__body" style={{ background: EventUtils.showEventColor(event.eventType) }}>
           <div className="event__body--header">
             <h1>{event.name}</h1>
             <Image src={event.image} alt="event" />
@@ -115,16 +116,18 @@ function Event() {
               <Divider />
             </Information>
           </div>
-          <div className="event__body--energyland">
-            <Image src={Energylandia} alt="Energylandia" />
-            <div className="event__body--energyland--info">
-              <Information location>
-                <h3>Całodniowa wycieczka do Energylandii</h3>
-                <a href="https://energylandia.pl/">energylandia.pl</a>
-                <Divider />
-              </Information>
+          {event.energyland && (
+            <div className="event__body--energyland">
+              <Image src={Energylandia} alt="Energylandia" />
+              <div className="event__body--energyland--info">
+                <Information location>
+                  <h3>Całodniowa wycieczka do Energylandii</h3>
+                  <a href="https://energylandia.pl/">energylandia.pl</a>
+                  <Divider />
+                </Information>
+              </div>
             </div>
-          </div>
+          )}
           <div className="event__body--attractions">
             <div className="event__body--attractions--wrapper">
               {/* <Dots color="#f7b124" /> */}
