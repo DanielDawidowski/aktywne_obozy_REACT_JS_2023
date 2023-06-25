@@ -1,0 +1,10 @@
+.chat {
+  position: fixed;
+  bottom: 10%;
+  right: 10%;
+  border: 10px solid var(--primary-1);
+  &__body {
+    width: 300px;
+    height: 400px;
+  }
+}
